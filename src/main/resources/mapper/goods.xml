@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.map.GoodsMap">
+    <resultMap id="result" type="com.example.demo.domain.Goods">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="unitId" column="unit_id"/>
+        <result property="classId" column="class_id"/>
+        <result property="price" column="price"/>
+        <result property="supplierId" column="supplier_id"/>
+        <result property="status" column="status"/>
+
+    </resultMap>
+    <insert id="insert" parameterType="com.example.demo.domain.Goods">
+        insert into goods(name,unit_id,class_id,price,supplier_id) values (#{name},#{unitId},#{classId},#{price},#{supplierId});
+    </insert>
+
+    <select id="selectAll" resultMap="result">
+        select * from goods;
+    </select>
+
+    <select id="selectId" parameterType="int" resultMap="result">
+        select * from goods where id=#{id};
+    </select>
+
+    <select id="selectPage" resultType="com.alibaba.fastjson.JSONObject">
+        select g.id,g.name,g.price,u.name,c.name,s.name,s.address,s.contact,s.tel,s.deliverMoney from goods g inner join unit u on g.unit_id = u.id inner join class c on g.class_id = c.id
+    inner join supplier s on g.supplier_id = s.id  where g.status=1 limit #{page},#{num};
+    </select>
+
+    <update id="updateId" parameterType="com.example.demo.domain.Goods">
+        update goods set name=#{name} where id=#{id};
+    </update>
+
+
+    <!--删除,，激活 通过id修改状态-->
+    <delete id="updateStatus" parameterType="com.example.demo.domain.Goods">
+        update goods set status=#{status}
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+
+
+        </where>
+    </delete>
+
+
+    <!--查找名字是否存在-->
+    <select id="selectName" parameterType="com.example.demo.domain.Goods" resultType="int" >
+        select count(*) from goods
+        <where>
+            <if test="name != null and name != ''">
+                name = #{name}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+
+
+        </where>
+    </select>
+</mapper>

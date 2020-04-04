@@ -1,0 +1,48 @@
+POST http://localhost:8080/unit/insert
+Content-Type: application/json
+
+{
+  "name":"口"
+
+}
+
+###
+
+GET http://localhost:8080/unit/listId/1
+
+
+###
+
+GET http://localhost:8080/unit/list
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/unit/selectPage
+Content-Type: application/json
+
+{
+  "page":1,
+  "num": 4
+}
+
+###
+
+POST http://localhost:8080/unit/updateId
+Content-Type: application/json
+
+{
+  "id":22,
+  "name": "生"
+}
+
+###
+
+POST http://localhost:8080/unit/deleteId
+Content-Type: application/json
+
+{
+  "id":"22"
+}
+
+###

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.map.UserMap">
+    <insert id="insert" parameterType="com.example.demo.domain.User">
+        insert into user (name,password) values (#{name},#{password});
+    </insert>
+
+    <select id="selectAll" resultType="com.example.demo.domain.User">
+        select * from user;
+    </select>
+
+    <select id="selectId" parameterType="int" resultType="com.example.demo.domain.User">
+        select * from user where id=#{id};
+    </select>
+
+    <select id="selectPage" resultType="com.example.demo.domain.User">
+        select * from user limit #{page}, #{num};
+    </select>
+
+    <update id="updateId" parameterType="com.example.demo.domain.User">
+        update user set name=#{name},password=#{password} where id=#{id};
+    </update>
+
+
+    <!--删除,，激活 通过id修改状态-->
+    <delete id="updateStatus" parameterType="com.example.demo.domain.User">
+        update user set password=#{password},status=#{status}
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+
+
+        </where>
+    </delete>
+
+
+    <!--查找名字是否存在-->
+    <select id="selectName" parameterType="com.example.demo.domain.User" resultType="int" >
+        select count(*) from user
+        <where>
+            <if test="name != null and name != ''">
+                name = #{name}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+
+
+        </where>
+    </select>
+</mapper>

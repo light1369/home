@@ -1,0 +1,53 @@
+POST http://localhost:8080/goods/insert
+Content-Type: application/json
+
+{
+  "name": "电子",
+  "unitId": 18,
+  "classId": 6,
+  "price": 52,
+  "supplierId": 6
+
+
+}
+
+###
+
+GET http://localhost:8080/goods/listId/5
+
+
+###
+
+GET http://localhost:8080/goods/list
+
+
+###
+
+POST http://localhost:8080/goods/selectPage
+Content-Type: application/json
+
+{
+  "page":2,
+  "num": 4
+}
+
+###
+
+
+PUT http://localhost:8080/goods/updateId
+Content-Type: application/json
+
+{
+  "id":25,
+  "name": "水杯"
+}
+
+###
+
+DELETE http://localhost:8080/goods/deleteId
+Content-Type: application/json
+
+{
+  "id":"dfgrf"
+}
+###

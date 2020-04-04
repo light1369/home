@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.map.UnitMap">
+    <insert id="insert" parameterType="com.example.demo.domain.Unit">
+        insert into unit (name) values (#{name});
+    </insert>
+
+    <select id="selectAll" resultType="com.example.demo.domain.Unit">
+        select * from unit;
+    </select>
+
+    <select id="selectId" parameterType="int" resultType="com.example.demo.domain.Unit">
+        select * from unit where id=#{id};
+    </select>
+
+    <select id="selectPage" resultType="com.example.demo.domain.Unit">
+        select * from unit limit #{page}, #{num};
+    </select>
+
+    <update id="updateId" parameterType="com.example.demo.domain.Unit">
+        update unit set name=#{name} where id=#{id};
+    </update>
+
+
+    <!--删除,，激活 通过id修改状态-->
+    <delete id="updateStatus" parameterType="com.example.demo.domain.Unit">
+        update unit set status=#{status}
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+
+
+        </where>
+    </delete>
+
+
+    <!--查找名字是否存在-->
+    <select id="selectName" parameterType="com.example.demo.domain.Unit" resultType="int" >
+        select count(*) from unit
+        <where>
+            <if test="name != null and name != ''">
+                name = #{name}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+
+
+        </where>
+    </select>
+</mapper>

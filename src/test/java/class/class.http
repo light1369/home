@@ -1,0 +1,41 @@
+POST http://localhost:8080/class/insert
+Content-Type: application/json
+
+{
+  "name": "电子"
+
+}
+
+###
+
+GET http://localhost:8080/class/listId/5
+
+###
+
+POST http://localhost:8080/class/selectPage
+Content-Type: application/json
+
+{
+  "page":1,
+  "num": 4
+}
+
+###
+
+PUT http://localhost:8080/class/updateId
+Content-Type: application/json
+
+{
+  "id":11,
+  "name": "电子"
+}
+
+###
+
+DELETE http://localhost:8080/class/deleteId
+Content-Type: application/json
+
+{
+  "id":"iii"
+}
+###

@@ -1,0 +1,50 @@
+POST http://localhost:8080/user/insert
+Content-Type: application/json
+
+{
+  "name":"li",
+  "password": "54586"
+
+}
+
+###
+
+GET http://localhost:8080/user/listId/1
+
+
+###
+
+GET http://localhost:8080/user/list
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/user/selectPage
+Content-Type: application/json
+
+{
+  "page":1,
+  "num": 4
+}
+
+###
+
+POST http://localhost:8080/user/updateId
+Content-Type: application/json
+
+{
+  "id":1,
+  "name": "生",
+  "password":"dsfsd"
+}
+
+###
+
+POST http://localhost:8080/user/deleteId
+Content-Type: application/json
+
+{
+  "id":9
+}
+
+###
