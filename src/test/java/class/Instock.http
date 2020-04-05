@@ -1,0 +1,23 @@
+POST http://127.0.0.1:8080/shoping/instock
+Content-Type: application/json
+
+
+{
+  "Goods_list":	[
+    {
+      "Goods_id":17,
+      "Original_price":6,
+      "Amount":55
+    }
+  ,
+    {
+      "Goods_id":19,
+      "Original_price":9,
+      "Amount":53
+    }
+  ],
+  "Supplier_id":6
+}
+
+
+###

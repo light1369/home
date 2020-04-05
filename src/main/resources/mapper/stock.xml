@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+        <mapper namespace="com.example.demo.map.StockMap">
+            <resultMap id="result" type="com.example.demo.domain.Instock">
+                <result property="id" column="id"/>
+                <result property="gId" column="g_id"/>
+                <result property="originalPrice" column="original_price"/>
+                <result property="amount" column="amount"/>
+                <result property="freezeCount" column="freeze_count"/>
+                <result property="batchNum" column="batch_num"/>
+                <result property="status" column="status"/>
+            </resultMap>
+
+
+<!--添加数据至仓库表-->
+    <select id="insertStock" parameterMap="result" resultType="int">
+        insert into stock (g_id, original_price, amount)value (#{goodid} ,#{OrPrice},#{Amount});
+    </select>
+
+    <!--修改仓库表总库存数-->
+    <update id="updateStock" parameterMap="result">
+        update stock set amount=(amount+#{Amount}) ,batch_num=(batch_num+1) where g_id=#{goodid};
+    </update>
+
+    <!--查询仓库表是否存在此商品-->
+    <select id="selectStockId" parameterType="java.lang.Integer" resultType="int">
+        select count(*) counts from stock where g_id=#{goodid} and status=1;
+    </select>
+
+
+
+
+</mapper>

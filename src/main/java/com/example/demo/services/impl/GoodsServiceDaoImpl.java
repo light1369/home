@@ -53,4 +53,9 @@ public class GoodsServiceDaoImpl implements GoodsServiceDao {
     public int selectName(Goods goods) {
         return goodsMap.selectName(goods);
     }
+
+    @Override
+    public int selectGoodsId(Integer goodId) {
+        return goodsMap.selectGoodsId(goodId);
+    }
 }

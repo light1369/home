@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+        <mapper namespace="com.example.demo.map.InstockMap">
+            <resultMap id="result" type="com.example.demo.domain.Instock">
+                <result property="id" column="id"/>
+                <result property="supplierId" column="supplier_id"/>
+                <result property="totalMoney" column="total_money"/>
+                <result property="createTime" column="create_time"/>
+                <result property="orderNumber" column="order_number"/>
+                <result property="status" column="status"/>
+            </resultMap>
+
+
+<!--查询流水号，返回String最新的流水号-->
+    <select id="initialization" resultType="String">
+        SELECT order_number FROM instock where date(create_time)=date(now()) ORDER BY create_time desc limit 0,1;
+    </select>
+
+    <!--添加入库单信息-->
+    <insert id="insertInstock"parameterMap="result">
+        insert into instock (supplier_id, create_time, order_number) value(#{supplierId} ,now(),#{orderNumber});
+    </insert>
+
+    <!--通过入库id查询入库单-->
+    <select id="selectNewInstock" parameterType="java.lang.Integer" resultType="com.example.demo.domain.Instock">
+        select supplier_id ,create_time,date(create_time) dates  from instock where id=#{instockNweId} and status=1;
+    </select>
+
+    <!--查询供应商id是否有效-->
+    <select id="selectSupplierId" parameterMap="result" resultType="int">
+        select count(*) counts from supplier where id=#{supplierId} and status=1;
+    </select>
+
+
+    <!--通过流水号查询时间最晚id-->
+    <select id="selesctOrderNumberId" parameterType="String" resultType="java.lang.Integer">
+        SELECT id FROM instock where order_number=#{orderNumber} ORDER BY create_time desc limit 0,1;
+</select>
+
+
+</mapper>

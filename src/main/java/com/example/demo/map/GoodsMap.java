@@ -35,4 +35,7 @@ public interface GoodsMap {
 
     //查询名字是否存在
     int selectName(Goods goods);
+
+    //校验商品表中是否存在此商品
+    int selectGoodsId(Integer goodId);
 }
