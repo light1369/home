@@ -72,12 +72,16 @@ public class GoodsControl {
         if (jsonObject.isEmpty()) {
             return Result.createFormatError();
         }//数据规范
-        int page = (int) jsonObject.get("page");
-        int num = (int) jsonObject.get("num");
-        if (page == 0 || num == 0) {
+        //if(true){return Result.createSuccess().put("ceshi","sfd");}
+        int page = jsonObject.getInteger("page");
+        int num = jsonObject.getInteger("num");
+        String gName=jsonObject.getString("gName");
+
+        if (page == 0 || num == 0 ) {
             return Result.createFormatError();
         }//数据规范
-        return Result.createSuccess().put("page", goodsServiceDao.selectPage((page - 1) * num, num));
+
+        return Result.createSuccess().put("page", goodsServiceDao.selectPage((page - 1) * num, num,gName));
     }
 
 

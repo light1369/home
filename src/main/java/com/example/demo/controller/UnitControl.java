@@ -17,7 +17,6 @@ import java.util.List;
  */
 
 @RestController//控制层
-@ResponseBody
 @RequestMapping(value = "/unit", produces = "application/json;charset=UTF-8")//user根目录
 
 public class UnitControl {

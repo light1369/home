@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Goods;
 import com.example.demo.domain.User;
 import com.example.demo.map.GoodsMap;
@@ -35,8 +36,8 @@ public class GoodsServiceDaoImpl implements GoodsServiceDao {
     }
 
     @Override
-    public List<Goods> selectPage(int page, int num) {
-        return goodsMap.selectPage(page,num);
+    public List<Goods> selectPage(int page, int num, String gName) {
+        return goodsMap.selectPage(page,num,gName);
     }
 
     @Override

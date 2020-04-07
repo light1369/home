@@ -19,7 +19,6 @@ import java.util.List;
  */
 
 @RestController//控制层
-@ResponseBody
 @RequestMapping(value = "/class", produces = "application/json;charset=UTF-8")
 public class ClassControl {
     @Autowired

@@ -1,5 +1,6 @@
 package com.example.demo.map;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Goods;
 import com.example.demo.domain.User;
 import org.springframework.stereotype.Repository;
@@ -23,7 +24,7 @@ public interface GoodsMap {
     List<Goods> selectId(int id);
 
     //分页查找
-    List<Goods> selectPage(int page,int num);
+    List<Goods> selectPage(int page,int num, String gName);
 
     //通过id修改信息
     int updateId(Goods goods);

@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Goods;
 import com.example.demo.domain.User;
 
@@ -17,7 +18,7 @@ public interface GoodsServiceDao {
 
     List<Goods> selectId(int id);
 
-    List<Goods> selectPage(int page,int num);
+    List<Goods> selectPage(int page, int num, String gName);
 
     int updateId(Goods goods);
 

@@ -17,7 +17,6 @@ import java.util.List;
  * @date 2020/3/23 - 13:43
  */
 @RestController//控制层
-@ResponseBody
 @RequestMapping(value = "/user", produces = "application/json;charset=UTF-8")
 //@RequestMapping(value = "/aa", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 //value = "/aa"-->根目录
