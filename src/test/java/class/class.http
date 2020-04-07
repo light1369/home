@@ -36,6 +36,6 @@ DELETE http://localhost:8080/class/deleteId
 Content-Type: application/json
 
 {
-  "id":"iii"
+  "id":"2555"
 }
 ###

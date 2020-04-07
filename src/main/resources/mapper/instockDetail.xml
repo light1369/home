@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-        <mapper namespace="com.example.demo.map.InstockMap">
-            <resultMap id="result" type="com.example.demo.domain.Instock">
+        <mapper namespace="com.example.demo.map.InstockDetailMap">
+            <resultMap id="result" type="com.example.demo.domain.InstockDetail">
                 <result property="id" column="id"/>
                 <result property="goodsId" column="goods_id"/>
                 <result property="originalPrice" column="original_price"/>
@@ -12,18 +12,15 @@
                 <result property="status" column="status"/>
             </resultMap>
 
-    <select id="" resultType="String">
-            select goods_id,sum(amount) total,avg(original_price) price from instock_detail  where instock_id="+instockId+" and status=1 group by goods_id ;";
+    <!--查询入库明细-->
+    <select id="selectNewDetail" parameterType="java.lang.Integer" resultMap="result">
+            select * from instock_detail  where instock_id=#{instockId} and status=1 ;
     </select>
 
 
 
-
-
-
-
     <!--插入入库明细-->
-    <insert id="insertDetail" parameterMap="result" >
+    <insert id="insertDetail" parameterType="com.example.demo.domain.InstockDetail" >
         insert into instock_detail (goods_id, original_price,amount,instock_id) value(#{goodid},#{OrPrice},#{Amount},#{instockNweId});
     </insert>
 

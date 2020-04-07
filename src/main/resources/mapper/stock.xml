@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
         <mapper namespace="com.example.demo.map.StockMap">
-            <resultMap id="result" type="com.example.demo.domain.Instock">
+            <resultMap id="result" type="com.example.demo.domain.Stock">
                 <result property="id" column="id"/>
                 <result property="gId" column="g_id"/>
                 <result property="originalPrice" column="original_price"/>
@@ -15,12 +15,12 @@
 
 
 <!--添加数据至仓库表-->
-    <select id="insertStock" parameterMap="result" resultType="int">
+    <insert id="insertStock" parameterType="com.example.demo.domain.Stock" >
         insert into stock (g_id, original_price, amount)value (#{goodid} ,#{OrPrice},#{Amount});
-    </select>
+    </insert>
 
     <!--修改仓库表总库存数-->
-    <update id="updateStock" parameterMap="result">
+    <update id="updateStock" parameterType="com.example.demo.domain.Stock">
         update stock set amount=(amount+#{Amount}) ,batch_num=(batch_num+1) where g_id=#{goodid};
     </update>
 

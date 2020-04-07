@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Instock;
 import com.example.demo.map.InstockMap;
 import com.example.demo.services.InstockServiceDao;
@@ -40,23 +41,20 @@ public class InstockServiceDaoImpl implements InstockServiceDao {
         return number;
     }
 
-    @Override
-    public int selectSupplierId(Integer supplierId) {
-        return instockMap.selectSupplierId(supplierId);
-    }
+
 
     @Override
-    public int insertInstock(Integer supplierId, String orderNumber) {
-        return instockMap.insertInstock(supplierId,orderNumber);
+    public int insertInstock(Instock instock) {
+        return instockMap.insertInstock(instock);
     }
 
-    @Override
-    public Integer selesctOrderNumberId(String orderNumber) {
-        return instockMap.selesctOrderNumberId(orderNumber);
-    }
+//    @Override
+//    public Integer selesctOrderNumberId(String orderNumber) {
+//        return instockMap.selesctOrderNumberId(orderNumber);
+//    }
 
     @Override
-    public List<Instock> selectNewInstock(Integer instockNweId) {
+    public List<JSONObject> selectNewInstock(Integer instockNweId) {
         return instockMap.selectNewInstock(instockNweId);
     }
 

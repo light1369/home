@@ -2,7 +2,7 @@ POST http://localhost:8080/goods/insert
 Content-Type: application/json
 
 {
-  "name": "电子",
+  "name": "口罩",
   "unitId": 18,
   "classId": 6,
   "price": 52,

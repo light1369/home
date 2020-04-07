@@ -2,25 +2,18 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Instock;
-import com.example.demo.map.GoodsMap;
-import com.example.demo.map.StockMap;
+import com.example.demo.domain.InstockDetail;
 import com.example.demo.result.Result;
-import com.example.demo.services.GoodsServiceDao;
-import com.example.demo.services.InstockDetailServiceDao;
-import com.example.demo.services.InstockServiceDao;
-import com.example.demo.services.StockServiceDao;
+import com.example.demo.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Duan
@@ -37,98 +30,116 @@ public class InstockControl {
     GoodsServiceDao goodsServiceDao;
     @Autowired
     StockServiceDao stockServiceDao;
+    @Autowired
+    SupplierServiceDao supplierServiceDao;
 
 
     @RequestMapping("/instock")
+    @Transactional
     public Result instock(@RequestBody HashMap hashMap) {
         //goodslist参数
+        List<Map<String, Object>> goodsList = null;
         Integer goodid = null;
         double OrPrice = 0;
         Integer Amount = null;
+        double totalPrice = 0;
 
         //添加入库明细参数
         int instockId = 0;
         String seInstockId = null;
         String inInstock_detail = null;
 
-        //获取流水号
-        String orderNumber=instockServiceDao.initialization();
+        //校验hashmap有无数据
+        if (hashMap.isEmpty()) {
+            return Result.createNotFoundError();
+        }
 
-        Integer SupplierId=(Integer)hashMap.get("Supplier_id");//得到供应商id
+        //获取流水号
+        String orderNumber = instockServiceDao.initialization();
+
+        Integer SupplierId = (Integer) hashMap.get("Supplier_id");//得到供应商id
+
+        if (SupplierId == null) {
+            return Result.createNotFoundGoodsError().put("supplierId", SupplierId);
+        } else if (!Result.verificationNumber((String) hashMap.get("Supplier_id"))) {//是否是integer类型
+            return Result.createFormatError();
+        }
+
+
         //校验无效供应商
-        if (instockServiceDao.selectSupplierId(SupplierId) == 0) {
+        if (supplierServiceDao.selectSupplierId(SupplierId) == 0) {
             return Result.createNotFoundSuppllierError();
         }
 
 
-        HashMap map = (HashMap) hashMap.get("Goods_list");//得到商品集合
+        if (hashMap.get("Goods_list") instanceof List) {//校验是否是list集合
+            goodsList = (List) hashMap.get("Goods_list");//得到商品集合
+            //遍历商品集合
+            for (Map<String, Object> l : goodsList) {
+                goodid = (Integer) l.get("Goods_id");
+                OrPrice = (double) l.get("Original_price");
+                Amount = (Integer) l.get("Amount");
 
-        while (HashMap map:map){
+                if (goodid == null || OrPrice == 0 || Amount == null) {
+                    return Result.createNotFoundGoodsError();
+                }
 
+
+                //校验商品表中是否存在此商品
+                if (goodsServiceDao.selectGoodsId(goodid) == 0) {
+                    return Result.createNotFoundGoodsError();
+                }
+
+                //校验仓库是否存在此商品
+                int countt = stockServiceDao.selectStockId(goodid);
+                if (countt == 0) {//不存在则添加
+                    stockServiceDao.insertStock(goodid, OrPrice, Amount);
+                }
+                if (countt == 1) {//存在则修改总数
+                    stockServiceDao.updateStock(Amount, goodid);
+                }
+            }
+
+        } else {
+            return Result.createFormatError();
         }
-        goodid=(Integer)map.get("Goods_id");
-        OrPrice=(double)map.get("Original_price");
-        goodid=(Integer)map.get("Amount");
 
-
-
-
-        //校验商品表中是否存在此商品
-            if (goodsServiceDao.selectGoodsId(goodid) == 0) {
-                return Result.createNotFoundGoodsError();
-            }
-
-        //校验仓库是否存在此商品
-            int countt=stockServiceDao.selectStockId(goodid);
-            if (countt == 0) {//不存在则添加
-                stockServiceDao.insertStock(goodid,OrPrice,Amount);
-            }
-            if (countt == 1) {//存在则修改总数
-                stockServiceDao.updateStock(Amount,goodid);
-            }
 
 //添加入库单
-        instockServiceDao.insertInstock(SupplierId,orderNumber);
+        Instock instock = new Instock();
+        instock.setOrderNumber(orderNumber);
+        instock.setSupplierId(SupplierId);
+        instockServiceDao.insertInstock(instock);
 
+//查找刚入库的入库单id
+        Integer instockNweId = instock.getId();//得到添加入库的id
 
-        Integer instockNweId=instockServiceDao.selesctOrderNumberId(orderNumber);//查找刚入库的入库单id
 //添加入库明细
-        for (Object m : hashMap) {
-            instockDetailServiceDao.insertDetail(goodid,OrPrice,Amount,instockNweId);//添加入库明细
+        for (Map<String, Object> l : goodsList) {
+            goodid = (Integer) l.get("Goods_id");
+            OrPrice = (double) l.get("Original_price");
+            Amount = (Integer) l.get("Amount");
+            instockDetailServiceDao.insertDetail(goodid, OrPrice, Amount, instockNweId);//添加入库明细
+        }
 
-            }
 //返回入库单
-        List<Instock> list=instockServiceDao.selectNewInstock(instockNweId);
-            for (Object l:list){
-
-                l.put("供应商id",rs1.getInt("supplier_id"));
-                j.put("入库时间",rs1.getDate("create_time"));
-                Date d=rs1.getDate("dates");
-                document=d.toString()+orderNumber;
-                j.put("单据号",document);
-
-            }
-            rs2=sta.executeQuery(seinstockDetail);
-            while (rs2.next()){
-                JSONObject json=new JSONObject();
-                json.put("商品id",rs2.getInt("goods_id"));
-                totalAmount=rs2.getInt("total");
-                json.put("总数",totalAmount);
-                OrPrice =rs2.getDouble("price");
-                json.put("价格",OrPrice);
-                resultList.add(json);
-                j.put("明细",json);
-                totalPrice=totalPrice+(totalAmount*OrPrice);//总价
-
-            }
-            //resultList.add(totalPrice);
-            j.put("总价",totalPrice);
+        List<JSONObject> instockList = instockServiceDao.selectNewInstock(instockNweId);
 
 
+//返回入库明细
+        List<InstockDetail> instockDetailsList = instockDetailServiceDao.selectNewDetail(instockNweId);
+
+        for (InstockDetail l : instockDetailsList) {
+            Amount = l.getAmount();
+            OrPrice = l.getOriginalPrice();
+
+            totalPrice = totalPrice + (Amount * OrPrice);//总价
+
+        }
 
 
-        return Result.createSuccess();
+        return Result.createSuccess().put("入库明细", instockDetailsList).put("入库单：", instockList).put("总价", totalPrice);
     }
 
-
+//if(true){return Result.createSuccess().put("ceshi",instockDetailsList);}
 }

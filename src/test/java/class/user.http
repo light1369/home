@@ -44,7 +44,7 @@ POST http://localhost:8080/user/deleteId
 Content-Type: application/json
 
 {
-  "id":9
+  "id":222
 }
 
 ###
