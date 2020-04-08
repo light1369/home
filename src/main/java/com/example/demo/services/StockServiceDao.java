@@ -10,7 +10,7 @@ public interface StockServiceDao {
 
     int selectStockId(Integer goodid);//通过id查询库存表是否存在此商品
 
-    int insertStock(Integer goodid,double OrPrice,Integer Amount);//添加数据至仓库表
+    int insertStock(Integer goodid,double OrPrice,double Amount);//添加数据至仓库表
 
-    int updateStock(Integer Amount,Integer goodid);//商品存在，修改库存
+    int updateStock(double Amount,Integer goodid);//商品存在，修改库存
 }

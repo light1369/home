@@ -21,7 +21,7 @@ public class InstockDetailServiceDaoImpl implements InstockDetailServiceDao {
 
 
     @Override
-    public int insertDetail(Integer goodid, double OrPrice, Integer Amount, Integer instockNweId) {
+    public int insertDetail(Integer goodid, double OrPrice, double Amount, Integer instockNweId) {
         return instockDetailMap.insertDetail(goodid,OrPrice,Amount,instockNweId);
     }
 

@@ -7,13 +7,13 @@ Content-Type: application/json
     {
       "Goods_id":21,
       "Original_price":6.6,
-      "Amount":51
+      "Amount":51.00
     }
   ,
     {
       "Goods_id":23,
       "Original_price":42.0,
-      "Amount":23
+      "Amount":23.00
     }
   ],
   "Supplier_id":7

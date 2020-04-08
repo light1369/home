@@ -13,7 +13,7 @@ import java.util.Map;
  */
 @Repository
 public interface InstockDetailMap {
-    int insertDetail(Integer goodid,double OrPrice,Integer Amount,Integer instockNweId);//添加入库明细
+    int insertDetail(Integer goodid,double OrPrice,double Amount,Integer instockNweId);//添加入库明细
 
     List<InstockDetail> selectNewDetail(Integer instockNweId);//返回入库明细
 }

@@ -9,14 +9,14 @@ public class InstockDetail {
     private Integer id;
     private Integer goodsId;//商品id
     private double originalPrice;//商品原价
-    private Integer amount;//总计
+    private double amount;//总计
     private Integer instockId;//库存id
     private Integer status;//状态
 
     public InstockDetail() {
     }
 
-    public InstockDetail(Integer id, Integer goodsId, double originalPrice, Integer amount, Integer instockId, Integer status) {
+    public InstockDetail(Integer id, Integer goodsId, double originalPrice, double amount, Integer instockId, Integer status) {
         this.id = id;
         this.goodsId = goodsId;
         this.originalPrice = originalPrice;
@@ -49,11 +49,11 @@ public class InstockDetail {
         this.originalPrice = originalPrice;
     }
 
-    public Integer getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

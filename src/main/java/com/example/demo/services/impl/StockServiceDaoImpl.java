@@ -21,12 +21,12 @@ public class StockServiceDaoImpl implements StockServiceDao {
     }
 
     @Override
-    public int insertStock(Integer goodid,double OrPrice,Integer Amount) {
+    public int insertStock(Integer goodid,double OrPrice,double Amount) {
         return stockMap.insertStock(goodid,OrPrice,Amount);
     }
 
     @Override
-    public int updateStock(Integer Amount, Integer goodid) {
+    public int updateStock(double Amount, Integer goodid) {
         return stockMap.updateStock(Amount,goodid);
     }
 }

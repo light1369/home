@@ -47,7 +47,7 @@ public class InstockControl {
         List<Map<String, Object>> goodsList = null;
         Integer goodid = null;
         double OrPrice = 0;
-        Integer Amount = null;
+        double Amount = 0;
         double totalPrice = 0;
 
         //添加入库明细参数
@@ -86,9 +86,9 @@ public class InstockControl {
             for (Map<String, Object> l : goodsList) {
                 goodid = (Integer) l.get("Goods_id");
                 OrPrice = (double) l.get("Original_price");
-                Amount = (Integer) l.get("Amount");
+                Amount = (double) l.get("Amount");
 
-                if (goodid == null || OrPrice == 0 || Amount == null) {
+                if (goodid == null || OrPrice == 0 || Amount == 0) {
                     return Result.createNotFoundGoodsError();
                 }
 
@@ -126,7 +126,7 @@ public class InstockControl {
         for (Map<String, Object> l : goodsList) {
             goodid = (Integer) l.get("Goods_id");
             OrPrice = (double) l.get("Original_price");
-            Amount = (Integer) l.get("Amount");
+            Amount = (double) l.get("Amount");
             instockDetailServiceDao.insertDetail(goodid, OrPrice, Amount, instockNweId);//添加入库明细
         }
 
