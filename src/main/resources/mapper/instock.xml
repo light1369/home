@@ -40,4 +40,9 @@
 </select>-->
 
 
+    <!--添加入库单总金额-->
+    <update id="insertTotalMoney" >
+        update instock set total_money=#{totalPrice} where id=#{instockNweId};
+    </update>
+
 </mapper>

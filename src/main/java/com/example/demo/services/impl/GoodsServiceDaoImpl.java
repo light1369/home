@@ -1,14 +1,13 @@
 package com.example.demo.services.impl;
-
-import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Goods;
-import com.example.demo.domain.User;
 import com.example.demo.map.GoodsMap;
 import com.example.demo.services.GoodsServiceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Duan
@@ -36,8 +35,8 @@ public class GoodsServiceDaoImpl implements GoodsServiceDao {
     }
 
     @Override
-    public List<Goods> selectPage(int page, int num, String gName) {
-        return goodsMap.selectPage(page,num,gName);
+    public List<Map> selectPage(Map map) {
+        return goodsMap.selectPage(map);
     }
 
     @Override

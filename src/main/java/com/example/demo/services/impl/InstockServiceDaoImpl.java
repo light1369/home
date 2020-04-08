@@ -58,5 +58,10 @@ public class InstockServiceDaoImpl implements InstockServiceDao {
         return instockMap.selectNewInstock(instockNweId);
     }
 
+    @Override
+    public int insertTotalMoney(Integer instockNweId, double totalPrice) {
+        return instockMap.insertTotalMoney(instockNweId,totalPrice);
+    }
+
 
 }

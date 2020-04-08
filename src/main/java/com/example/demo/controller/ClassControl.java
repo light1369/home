@@ -1,16 +1,11 @@
 package com.example.demo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Class;
-import com.example.demo.domain.User;
 import com.example.demo.result.Result;
 import com.example.demo.services.ClassServiceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.util.List;
 
 /**

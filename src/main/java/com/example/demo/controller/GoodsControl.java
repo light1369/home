@@ -5,10 +5,11 @@ import com.example.demo.domain.Goods;
 import com.example.demo.result.Result;
 import com.example.demo.services.GoodsServiceDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Duan
@@ -68,20 +69,20 @@ public class GoodsControl {
     }
 
     @PostMapping("/selectPage")
-    public Result selectPage(@RequestBody JSONObject jsonObject) {//用json接实体类以外的参数
-        if (jsonObject.isEmpty()) {
+    public Result selectPage(@RequestBody Map map) {//用json接实体类以外的参数
+        if (map.isEmpty()) {
             return Result.createFormatError();
         }//数据规范
         //if(true){return Result.createSuccess().put("ceshi","sfd");}
-        int page = jsonObject.getInteger("page");
-        int num = jsonObject.getInteger("num");
-        String gName=jsonObject.getString("gName");
+        int page = (int)map.get("page");
+        int num = (int)map.get("num");
+        map.put("page",(page - 1) * num);
 
         if (page == 0 || num == 0 ) {
             return Result.createFormatError();
         }//数据规范
 
-        return Result.createSuccess().put("page", goodsServiceDao.selectPage((page - 1) * num, num,gName));
+        return Result.createSuccess().put("page", goodsServiceDao.selectPage(map));//(page - 1) * num, num
     }
 
 

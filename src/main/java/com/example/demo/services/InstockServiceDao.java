@@ -21,5 +21,7 @@ public interface InstockServiceDao {
 
     List<JSONObject> selectNewInstock(Integer instockNweId);
 
+    int insertTotalMoney(Integer instockNweId,double totalPrice);//通过新id添加入库商品总金额
+
 
 }

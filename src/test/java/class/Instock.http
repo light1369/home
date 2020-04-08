@@ -5,23 +5,18 @@ Content-Type: application/json
 {
   "Goods_list":	[
     {
-      "Goods_id":17,
+      "Goods_id":21,
       "Original_price":6.6,
       "Amount":51
     }
   ,
     {
-      "Goods_id":19,
+      "Goods_id":23,
       "Original_price":42.0,
       "Amount":23
-    },
-    {
-      "Goods_id":6,
-      "Original_price":50.0,
-      "Amount":45
     }
   ],
-  "Supplier_id":9
+  "Supplier_id":7
 }
 
 

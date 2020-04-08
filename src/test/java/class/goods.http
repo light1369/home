@@ -27,9 +27,22 @@ POST http://localhost:8080/goods/selectPage
 Content-Type: application/json
 
 {
+
   "page":1,
-  "num": 4,
-  "gName": "奶"
+  "num": 10,
+  "gId":"",
+  "gName": "",
+  "uName": "",
+  "gPriceMin": "",
+  "gPriceMax": "50",
+  "cName": "",
+  "sName": "",
+  "address": "",
+  "contact": "",
+  "tel": "",
+  "deliverMoney": ""
+
+
 }
 
 ###

@@ -25,14 +25,45 @@
         select * from goods where id=#{id};
     </select>
 
-    <select id="selectPage" resultType="com.alibaba.fastjson.JSONObject">
-        select g.id,g.name,g.price,u.name,c.name,s.name,s.address,s.contact,s.tel,s.deliverMoney from goods g inner join unit u on g.unit_id = u.id inner join class c on g.class_id = c.id
-    inner join supplier s on g.supplier_id = s.id <where>
+    <select id="selectPage" parameterType="java.util.Map" resultType="com.alibaba.fastjson.JSONObject">
+        select g.id gId,g.name gName,g.price gPrice,u.name uName,c.name cName,s.name sName,s.address sAddress,s.contact sContact,s.tel sTel,s.deliverMoney sDeliverMoney from goods g inner join unit u on g.unit_id = u.id inner join class c on g.class_id = c.id
+    inner join supplier s on g.supplier_id = s.id
+    <where>
         <if test="1 != null and 1 != ''">
           g.status=1
         </if>
+        <if test="gId != null and gId != ''">
+            and  g.id like '%${gId}%'
+        </if>
         <if test="gName != null and gName != ''">
           and  g.name like '%${gName}%'
+        </if>
+        <if test="uName != null and uName != ''">
+            and  u.name like '%${uName}%'
+        </if>
+        <if test="gPriceMin != null and gPriceMin != ''">
+            and  g.price &gt; #{gPriceMin}
+        </if>
+        <if test="gPriceMax != null and gPriceMax != ''">
+            and  g.price &lt; #{gPriceMax}
+        </if>
+        <if test="cName != null and cName != ''">
+            and  c.name like '%${cName}%'
+        </if>
+        <if test="sName != null and sName != ''">
+            and  s.name like '%${sName}%'
+        </if>
+        <if test="address != null and address != ''">
+            and  s.address like '%${address}%'
+        </if>
+        <if test="contact != null and contact != ''">
+            and  s.contact like '%${contact}%'
+        </if>
+        <if test="tel != null and tel != ''">
+            and  s.tel like '%${tel}%'
+        </if>
+        <if test="deliverMoney != null and deliverMoney != ''">
+            and  s.deliverMoney like '%${deliverMoney}%'
         </if>
 
     </where>

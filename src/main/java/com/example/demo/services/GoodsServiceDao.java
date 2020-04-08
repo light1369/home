@@ -1,10 +1,9 @@
 package com.example.demo.services;
-
-import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Goods;
-import com.example.demo.domain.User;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Duan
@@ -18,7 +17,7 @@ public interface GoodsServiceDao {
 
     List<Goods> selectId(int id);
 
-    List<Goods> selectPage(int page, int num, String gName);
+    List<Map> selectPage(Map map);
 
     int updateId(Goods goods);
 
