@@ -6,17 +6,17 @@ Content-Type: application/json
   "Goods_list":	[
     {
       "Goods_id":21,
-      "Original_price":6.6,
-      "Amount":51.00
+      "Original_price":52.0,
+      "Amount":21.00
     }
   ,
     {
       "Goods_id":23,
-      "Original_price":42.0,
+      "Original_price":22.0,
       "Amount":23.00
     }
   ],
-  "Supplier_id":7
+  "Supplier_id":9
 }
 
 

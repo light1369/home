@@ -28,7 +28,7 @@
 
     <!--通过入库id查询入库单-->
     <select id="selectNewInstock" parameterType="java.lang.Integer" resultType="com.alibaba.fastjson.JSONObject">
-        select supplier_id ,create_time,date(create_time) dates  from instock where id=#{instockNweId} and status=1;
+        select *  from instock where id=#{instockNweId} and status=1;
     </select>
 
 

@@ -7,6 +7,8 @@ import com.example.demo.services.InstockServiceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -27,15 +29,19 @@ public class InstockServiceDaoImpl implements InstockServiceDao {
 
         String number = "001";
         int num = 0;
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHH");
+        String dateString = formatter.format(currentTime);
 
         String oldnumber = instockMap.initialization();
         if (oldnumber != null) {
 
             //类型转换再加一
-            num = Integer.parseInt(oldnumber) + 1;
+            //将得到的入库单取最后的流水号
+            num = Integer.parseInt(oldnumber.substring(oldnumber.length() - 3)) + 1;
             String number1 = "00" + Integer.toString(num);//转为String类型
             number = number1.substring(number1.length() - 3);//取后三位
-            return number;
+            return dateString+number;
 
         }
         return number;

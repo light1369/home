@@ -42,7 +42,7 @@ public class InstockControl {
 
     @RequestMapping("/instock")
     @Transactional(propagation = Propagation.REQUIRED)
-    public Result instock(@RequestBody HashMap hashMap) {
+    public synchronized Result instock(@RequestBody HashMap hashMap) {//synchronized 保护数据，一个一个处理，防止线程异常
         //goodslist参数
         List<Map<String, Object>> goodsList = null;
         Integer goodid = null;
