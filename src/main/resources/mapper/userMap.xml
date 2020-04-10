@@ -54,4 +54,8 @@
 
         </where>
     </select>
+
+    <update id="addCashierMoney">
+        update user set cashier_money=cashier_money+#{cashierMoney} where id=#{userId} and status=1;
+    </update>
 </mapper>

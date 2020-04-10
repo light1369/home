@@ -14,4 +14,6 @@ public interface StockMap {
     int insertStock(Integer goodid,double OrPrice,double Amount);//添加数据至仓库表
 
     int updateStock(double Amount,Integer goodid);//商品存在，修改库存
+
+    double selectStockAmount(Integer goodId);//查询库存
 }

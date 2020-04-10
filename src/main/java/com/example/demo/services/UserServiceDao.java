@@ -24,8 +24,9 @@ public interface UserServiceDao {
 
     int updateStatus(User user);
 
-
-
     //查询名字是否存在
     int selectName(User user);
+
+    //添加销售单此次消费总金额
+    int addCashierMoney(double cashierMoney,Integer userId);
 }

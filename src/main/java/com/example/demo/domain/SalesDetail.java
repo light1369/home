@@ -4,23 +4,25 @@ package com.example.demo.domain;
  * @author Duan
  * @date 2020/4/9 - 11:15
  */
-public class salesDetail {
+public class SalesDetail {
     private Integer id;
     private Integer goodId;
-    private double orignalPrice;//小计
+    private Integer salesId;
     private double amount;
-    private Integer instockId;
+    private double price;//价格
+    private double subtotal;//小计
     private Integer status;
 
-    public salesDetail() {
+    public SalesDetail() {
     }
 
-    public salesDetail(Integer id, Integer goodId, double orignalPrice, double amount, Integer instockId, Integer status) {
+    public SalesDetail(Integer id, Integer goodId, Integer salesId, double amount, double price, double subtotal, Integer status) {
         this.id = id;
         this.goodId = goodId;
-        this.orignalPrice = orignalPrice;
+        this.salesId = salesId;
         this.amount = amount;
-        this.instockId = instockId;
+        this.price = price;
+        this.subtotal = subtotal;
         this.status = status;
     }
 
@@ -40,12 +42,12 @@ public class salesDetail {
         this.goodId = goodId;
     }
 
-    public double getOrignalPrice() {
-        return orignalPrice;
+    public Integer getSalesId() {
+        return salesId;
     }
 
-    public void setOrignalPrice(double orignalPrice) {
-        this.orignalPrice = orignalPrice;
+    public void setSalesId(Integer salesId) {
+        this.salesId = salesId;
     }
 
     public double getAmount() {
@@ -56,12 +58,20 @@ public class salesDetail {
         this.amount = amount;
     }
 
-    public Integer getInstockId() {
-        return instockId;
+    public double getPrice(double price) {
+        return this.price;
     }
 
-    public void setInstockId(Integer instockId) {
-        this.instockId = instockId;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
     }
 
     public Integer getStatus() {

@@ -1,0 +1,28 @@
+POST http://127.0.0.1:8080/sales/sold
+Content-Type: application/json
+
+
+{
+  "Goods_list":	[
+    {
+      "goodId":21,
+      "amount":1.30
+    }
+  ,
+    {
+      "goodId":23,
+      "amount":3.00
+    }
+    ,
+    {
+      "goodId":6,
+      "amount":4.00
+    }
+],
+  "pay": 10000.0,
+  "userId": 1
+
+}
+
+
+###

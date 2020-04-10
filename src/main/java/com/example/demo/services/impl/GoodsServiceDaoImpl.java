@@ -30,7 +30,7 @@ public class GoodsServiceDaoImpl implements GoodsServiceDao {
     }
 
     @Override
-    public List<Goods> selectId(int id) {
+    public List<Goods> selectId(Integer id) {
         return goodsMap.selectId(id);
     }
 

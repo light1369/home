@@ -15,7 +15,7 @@ public interface GoodsServiceDao {
     //@Select("select * from")
     List<Goods> selectAll();
 
-    List<Goods> selectId(int id);
+    List<Goods> selectId(Integer id);
 
     List<Map> selectPage(Map map);
 

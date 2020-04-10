@@ -20,7 +20,7 @@ public interface GoodsMap {
     List<Goods> selectAll();
 
     //通过id查找
-    List<Goods> selectId(int id);
+    List<Goods> selectId(Integer id);
 
     //分页查找
     List<Map> selectPage(Map map);

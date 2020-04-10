@@ -29,4 +29,9 @@ public class StockServiceDaoImpl implements StockServiceDao {
     public int updateStock(double Amount, Integer goodid) {
         return stockMap.updateStock(Amount,goodid);
     }
+
+    @Override
+    public double selectStockAmount(Integer goodId) {
+        return stockMap.selectStockAmount(goodId);
+    }
 }

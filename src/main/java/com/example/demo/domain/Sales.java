@@ -6,21 +6,21 @@ import java.util.Date;
  * @author Duan
  * @date 2020/4/9 - 11:08
  */
-public class sales {
+public class Sales {
 
     private Integer id;
-    private Integer staffId;
+    private Integer userId;
     private Date createTime;
     private double totalAmount;
     private String singleNumber;
     private Integer status;
 
-    public sales() {
+    public Sales() {
     }
 
-    public sales(Integer id, Integer staffId, Date createTime, double totalAmount, String singleNumber, Integer status) {
+    public Sales(Integer id, Integer userId, Date createTime, double totalAmount, String singleNumber, Integer status) {
         this.id = id;
-        this.staffId = staffId;
+        this.userId = userId;
         this.createTime = createTime;
         this.totalAmount = totalAmount;
         this.singleNumber = singleNumber;
@@ -35,12 +35,12 @@ public class sales {
         this.id = id;
     }
 
-    public Integer getStaffId() {
-        return staffId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setStaffId(Integer staffId) {
-        this.staffId = staffId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Date getCreateTime() {

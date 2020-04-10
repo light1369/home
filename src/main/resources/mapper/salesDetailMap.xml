@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.map.SalesDetailMap">
+
+    <insert id="InsertSalesDetail" parameterType="com.example.demo.domain.SalesDetail">
+        insert into sales_detail (good_id,sales_id,amount,price,subtotal) values (#{goodId},#{salesId},#{amount},#{price},#{subtotal});
+    </insert>
+
+    <select id="selectSalesDetail" parameterType="java.lang.Integer" resultType="java.util.Map">
+        SELECT g.name,s_d.amount,s_d.price,s_d.subtotal FROM sales_detail s_d inner join goods g on s_d.good_id = g.id  where s_d.sales_id=#{salesId} and s_d.status=1;
+    </select>
+
+
+
+
+</mapper>

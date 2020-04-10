@@ -7,17 +7,20 @@ package com.example.demo.domain;
 public class User {
     private Integer id;
     private String name;
-    private int status;
     private String password;
+    private double cashierMoney;
+    private int status;
+
 
     public User() {
     }
 
-    public User(Integer id, String name, int status, String password) {
+    public User(Integer id, String name, String password, double cashierMoney, int status) {
         this.id = id;
         this.name = name;
-        this.status = status;
         this.password = password;
+        this.cashierMoney = cashierMoney;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -36,19 +39,27 @@ public class User {
         this.name = name;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public double getCashierMoney() {
+        return cashierMoney;
+    }
+
+    public void setCashierMoney(double cashierMoney) {
+        this.cashierMoney = cashierMoney;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

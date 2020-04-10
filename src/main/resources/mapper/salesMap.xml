@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.map.SalesMap">
+
+    <!--用于得到销售单号-->
+    <select id="salesSingle" resultType="java.lang.String">
+        SELECT single_number FROM sales where date(create_time)=date(now()) ORDER BY create_time desc limit 0,1;
+    </select>
+
+    <!--添加销售单信息-->
+    <insert id="insertSales" parameterType="com.example.demo.domain.Sales" useGeneratedKeys="true" keyProperty="id">
+        insert into sales (user_id,create_time,single_number) values (#{userId},now(),#{singleNumber});
+    </insert>
+
+    <!--添加销售单此次消费总金额-->
+    <update id="addCashierMoney" >
+        update sales set total_amount=#{cashierMoney} where id=#{salesId} and status=1;
+    </update>
+
+    <!--通过salesIdc查询销售单-->
+    <select id="selectSales" parameterType="java.lang.Integer" resultType="java.util.Map">
+        SELECT create_time times, total_amount money,single_number singleNumber  FROM sales where id=#{salesId} and status=1;
+    </select>
+
+</mapper>

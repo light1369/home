@@ -29,6 +29,13 @@
         select count(*) counts from stock where g_id=#{goodid} and status=1;
     </select>
 
+    <!--查询仓库库存-->
+    <select id="selectStockAmount" parameterType="java.lang.Integer" resultType="double">
+        select amount from stock where g_id=#{goodid} and status=1;
+    </select>
+
+
+
 
 
 

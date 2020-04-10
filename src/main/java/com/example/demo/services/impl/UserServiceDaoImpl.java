@@ -70,5 +70,10 @@ public class UserServiceDaoImpl implements UserServiceDao {
         return userMap.selectName(user);
     }
 
+    @Override
+    public int addCashierMoney(double cashierMoney, Integer userId) {
+        return userMap.addCashierMoney(cashierMoney,userId);
+    }
+
 
 }
