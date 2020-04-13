@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Instock;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Duan
@@ -22,6 +23,10 @@ public interface InstockServiceDao {
     List<JSONObject> selectNewInstock(Integer instockNweId);
 
     int insertTotalMoney(Integer instockNweId,double totalPrice);//通过新id添加入库商品总金额
+
+
+
+
 
 
 }

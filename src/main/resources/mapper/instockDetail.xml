@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-        <mapper namespace="com.example.demo.map.InstockDetailMap">
+<mapper namespace="com.example.demo.map.InstockDetailMap">
             <resultMap id="result" type="com.example.demo.domain.InstockDetail">
                 <result property="id" column="id"/>
                 <result property="goodsId" column="goods_id"/>
@@ -24,6 +24,11 @@
         insert into instock_detail (goods_id, original_price,amount,instock_id) value(#{goodid},#{OrPrice},#{Amount},#{instockNweId});
     </insert>
 
+
+    <!--通过goodID判断商品是否在入库单-->
+    <select id="selectInstock" parameterType="java.lang.Integer" resultType="int">
+            select count(*) from instock_detail  where goods_id=#{goodId} and status=1 ;
+    </select>
 
 
 </mapper>

@@ -15,7 +15,7 @@ public class SupplierServiceDaoImpl implements SupplierServiceDao {
     SupplierMap supplierMap;
 
     @Override
-    public int selectSupplierId(Integer supplierId) {
-        return supplierMap.selectSupplierId(supplierId);
+    public int selectSupplier(Integer supplierId) {
+        return supplierMap.selectSupplier(supplierId);
     }
 }

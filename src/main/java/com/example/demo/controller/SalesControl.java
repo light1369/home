@@ -4,11 +4,13 @@ import com.example.demo.domain.Goods;
 import com.example.demo.domain.Sales;
 import com.example.demo.domain.SalesDetail;
 import com.example.demo.map.UserMap;
-import com.example.demo.result.Result;
+import com.example.demo.util.Result;
 import com.example.demo.services.GoodsServiceDao;
 import com.example.demo.services.SalesDetailServiceDao;
 import com.example.demo.services.SalesServiceDao;
 import com.example.demo.services.StockServiceDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,8 @@ import java.util.Map;
 
 
 public class SalesControl {
+    Logger logger= LoggerFactory.getLogger(SalesControl.class);
+
     @Autowired
     SalesServiceDao salesServiceDao;
     @Autowired
@@ -43,6 +47,8 @@ public class SalesControl {
     @RequestMapping("/sold")
     @Transactional(propagation = Propagation.REQUIRED)
     public Result sales(@RequestBody HashMap hashMap) {
+
+
         List<Map<String, Object>> goodsList = null;
         Integer goodId = null;
         double amount = 0.00;

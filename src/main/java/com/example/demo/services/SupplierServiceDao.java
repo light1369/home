@@ -6,5 +6,5 @@ package com.example.demo.services;
  */
 public interface SupplierServiceDao {
 
-    int selectSupplierId(Integer supplierId);  //通过id查询生产商
+    int selectSupplier(Integer supplierId);  //通过id查询生产商
 }

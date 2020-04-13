@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SupplierMap {
-    int selectSupplierId(Integer supplierId);  //通过id查询生产商
+    int selectSupplier(Integer supplierId);  //通过id查询生产商
 }

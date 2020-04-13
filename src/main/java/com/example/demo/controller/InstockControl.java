@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Instock;
 import com.example.demo.domain.InstockDetail;
-import com.example.demo.result.Result;
+import com.example.demo.util.Result;
 import com.example.demo.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,9 +75,10 @@ public class InstockControl {
 
 
         //校验无效供应商
-        if (supplierServiceDao.selectSupplierId(SupplierId) == 0) {
+        if (supplierServiceDao.selectSupplier(SupplierId) == 0) {
             return Result.createNotFoundSuppllierError();
         }
+
 
 
         if (hashMap.get("Goods_list") instanceof List) {//校验是否是list集合
@@ -88,7 +89,7 @@ public class InstockControl {
                 OrPrice = (double) l.get("Original_price");
                 Amount = (double) l.get("Amount");
 
-                if (goodid == null || OrPrice == 0 || Amount == 0) {
+                if (goodid == null || OrPrice == 0.0 || Amount == 0.0) {
                     return Result.createNotFoundGoodsError();
                 }
 
@@ -112,13 +113,11 @@ public class InstockControl {
             return Result.createFormatError();
         }
 
-
 //添加入库单
         Instock instock = new Instock();
         instock.setOrderNumber(orderNumber);
         instock.setSupplierId(SupplierId);
         instockServiceDao.insertInstock(instock);
-
 //查找刚入库的入库单id
         Integer instockNweId = instock.getId();//得到添加入库的id
 

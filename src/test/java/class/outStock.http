@@ -1,0 +1,22 @@
+POST http://127.0.0.1:8080/outStock/outStocks
+Content-Type: application/json
+
+
+{
+  "SupplierId": 6,
+  "userId": 1,
+  "outStockList": [
+    {
+      "goodsid": 21,
+      "amount": 120.0
+    },
+    {
+      "goodsid": 23,
+      "amount": 25.0
+    }
+  ]
+}
+
+
+
+###

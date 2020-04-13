@@ -16,4 +16,6 @@ public interface InstockDetailMap {
     int insertDetail(Integer goodid,double OrPrice,double Amount,Integer instockNweId);//添加入库明细
 
     List<InstockDetail> selectNewDetail(Integer instockNweId);//返回入库明细
+
+    int selectInstock(Integer goodId);//通过goodID判断商品是否在入库单
 }

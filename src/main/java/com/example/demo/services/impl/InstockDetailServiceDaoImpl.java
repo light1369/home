@@ -29,4 +29,9 @@ public class InstockDetailServiceDaoImpl implements InstockDetailServiceDao {
     public List<InstockDetail> selectNewDetail(Integer instockNweId) {
         return instockDetailMap.selectNewDetail(instockNweId);
     }
+
+    @Override
+    public int selectInstock(Integer goodId) {//通过goodID判断商品是否在入库单
+        return instockDetailMap.selectInstock(goodId);
+    }
 }

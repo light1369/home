@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.map.OutStockMap">
+            <resultMap id="resultInstock" type="com.example.demo.domain.OutStock">
+                <result property="id" column="id"/>
+                <result property="supplierId" column="supplier_id"/>
+                <result property="totalMoney" column="total_money"/>
+                <result property="createTime" column="create_time"/>
+                <result property="orderNumber" column="order_number"/>
+                <result property="status" column="status"/>
+            </resultMap>
+
+
+<!--查询流水号，返回String最新的流水号-->
+    <select id="initialization" resultType="java.lang.String">
+        SELECT order_number FROM outstock where date(create_time)=date(now()) ORDER BY create_time desc limit 0,1;
+    </select>
+
+
+
+    <!--添加出库单信息-->
+    <insert id="insertOutStock" parameterType="com.example.demo.domain.OutStock" useGeneratedKeys="true" keyProperty="id">
+        insert into outstock (supplier_id,user_id, create_time, order_number) value(#{supplierId},#{userId} ,now(),#{orderNumber});
+    </insert>
+
+
+    <!--添加出库明细-->
+    <insert id="insertOutStockDetail" parameterType="com.example.demo.domain.OutStockDetail" >
+        insert into outstock_detail (goods_id, original_price,amount,outstocks_id) value(#{goodId},#{price},#{amount},#{outStockNweId});
+    </insert>
+
+
+    <!--添加出库单总金额-->
+    <update id="insertTotalMoney" >
+        update outstock set total_money=total_money+#{totalMoney} where id=#{outStockNweId} and status=1;
+    </update>
+
+
+
+
+
+
+
+
+
+    <!--通过出库id查询入库单-->
+    <select id="selectNewOutStock" parameterType="java.lang.Integer" resultType="com.alibaba.fastjson.JSONObject">
+        select *  from outstock where id=#{outStockNweId} and status=1;
+    </select>
+
+
+
+
+
+
+
+
+    <!--查询出库明细-->
+    <select id="selectNewDetail" parameterType="java.lang.Integer" resultType="com.alibaba.fastjson.JSONObject">
+            select * from outstock_detail  where outstocks_id=#{outStockNweId} and status=1 ;
+    </select>
+
+
+
+
+
+</mapper>

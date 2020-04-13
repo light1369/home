@@ -1,8 +1,10 @@
 package com.example.demo.map;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Instock;
+import com.example.demo.domain.OutStockDetail;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Duan
@@ -11,7 +13,7 @@ import java.util.List;
 @Repository
 public interface InstockMap {
 
-    String initialization(); //返回流水号
+    String initialization(); //返回单号
 
     int insertInstock(Instock instock);//添加入库信息
 
@@ -21,6 +23,14 @@ public interface InstockMap {
 
 
     int insertTotalMoney(Integer instockNweId,double totalPrice);//通过新id添加入库商品总金额
+
+
+
+//传goodid,supplierid时间排序得到价格，数量
+    List<Map<String,Object>> selecAmountPrice(Integer goodId, Integer SupplierId);
+
+    int updateStatus(Integer instockDetailId);//退库后修改入库明细status
+
 
 
 }

@@ -15,4 +15,6 @@ public interface StockServiceDao {
     int updateStock(double Amount,Integer goodid);//商品存在，修改库存
 
     double selectStockAmount(Integer goodId);//查询库存
+
+    double selectPrice(Integer goodId);//得到入库价格
 }

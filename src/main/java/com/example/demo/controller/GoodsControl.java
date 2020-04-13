@@ -2,12 +2,13 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Goods;
-import com.example.demo.result.Result;
+import com.example.demo.util.Result;
 import com.example.demo.services.GoodsServiceDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/goods", produces = "application/json;charset=UTF-8")//user根目录
 public class GoodsControl {
+    Logger logger= LoggerFactory.getLogger(SalesControl.class);
     @Autowired// 自动注入
     private GoodsServiceDao goodsServiceDao;//属于依赖
 

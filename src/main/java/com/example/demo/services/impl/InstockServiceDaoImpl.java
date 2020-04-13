@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 
+
 /**
  * @author Duan
  * @date 2020/4/5 - 16:15
@@ -22,6 +23,7 @@ public class InstockServiceDaoImpl implements InstockServiceDao {
 
     @Autowired
     InstockMap instockMap;
+
 
   //返回流水号
     @Override
@@ -68,6 +70,8 @@ public class InstockServiceDaoImpl implements InstockServiceDao {
     public int insertTotalMoney(Integer instockNweId, double totalPrice) {
         return instockMap.insertTotalMoney(instockNweId,totalPrice);
     }
+
+
 
 
 }

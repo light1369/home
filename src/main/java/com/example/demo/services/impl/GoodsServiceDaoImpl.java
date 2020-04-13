@@ -5,7 +5,6 @@ import com.example.demo.services.GoodsServiceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,5 +56,11 @@ public class GoodsServiceDaoImpl implements GoodsServiceDao {
     @Override
     public int selectGoodsId(Integer goodId) {
         return goodsMap.selectGoodsId(goodId);
+    }
+
+    @Override
+    public int selectSupplierId(Integer goodId,Integer SupplierId) {
+
+        return goodsMap.selectSupplierId(goodId,SupplierId);
     }
 }

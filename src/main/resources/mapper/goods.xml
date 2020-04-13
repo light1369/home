@@ -112,4 +112,10 @@
     <select id="selectGoodsId" parameterType="java.lang.Integer" resultType="int">
              select count(*) counts from goods where id=#{goodId} and status=1;
     </select>
+
+
+    <!--查询供应商id-->
+    <select id="selectSupplierId" parameterType="java.lang.Integer" resultType="int">
+        select count(*)  from goods where id=#{goodId} and supplier_id=#{SupplierId} and status=1;
+    </select>
 </mapper>

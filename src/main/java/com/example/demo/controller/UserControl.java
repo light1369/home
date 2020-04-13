@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.User;
-import com.example.demo.result.Result;
+import com.example.demo.util.Result;
 import com.example.demo.services.UserServiceDao;
 
 import org.springframework.beans.factory.annotation.Autowired;

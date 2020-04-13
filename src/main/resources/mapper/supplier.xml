@@ -14,9 +14,11 @@
             </resultMap>
 
     <!--查询供应商id是否有效-->
-    <select id="selectSupplierId" parameterType="java.lang.Integer" resultType="int">
+    <select id="selectSupplier" parameterType="java.lang.Integer" resultType="int">
         select count(*) counts from supplier where id=#{supplierId} and status=1;
     </select>
+
+
 
 
 

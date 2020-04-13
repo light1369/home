@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.Unit;
 import com.example.demo.domain.User;
-import com.example.demo.result.Result;
+import com.example.demo.util.Result;
 import com.example.demo.services.UnitServiceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -38,4 +38,7 @@ public interface GoodsMap {
 
     //校验商品表中是否存在此商品
     int selectGoodsId(Integer goodId);
+
+    //查询供应商id
+    int selectSupplierId(Integer goodId,Integer SupplierId);
 }
