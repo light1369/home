@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.map.RefundsMap">
+<!--            <resultMap id="resultInstock" type="com.example.demo.domain.">-->
+<!--                <result property="id" column="id"/>-->
+<!--                <result property="supplierId" column="supplier_id"/>-->
+<!--                <result property="totalMoney" column="total_money"/>-->
+<!--                <result property="createTime" column="create_time"/>-->
+<!--                <result property="orderNumber" column="order_number"/>-->
+<!--                <result property="status" column="status"/>-->
+<!--            </resultMap>-->
+
+
+<!--查询流水号，返回String最新的流水号-->
+    <select id="initialization" resultType="java.lang.String">
+        SELECT order_number FROM refunds where date(create_time)=date(now()) ORDER BY create_time desc limit 0,1;
+    </select>
+
+
+    <!--通过销售单号查询是否可退-->
+    <select id="seleciOrderNumber" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select id from sales where single_number=#{orderNumber} and date_add(create_time, interval 7 day)>now() and status=1;
+    </select>
+
+
+    <!--通过销售单号查询是否可退-->
+    <select id="selecAmount" parameterType="com.example.demo.domain.RefundsDetail" resultType="java.lang.Double">
+        select price from sales_detail where sales_id=#{salesId} and good_id=#{goodId} and outgood>=#{amount} and status=1;
+    </select>
+
+
+
+    <!--添加退货单信息-->
+    <insert id="insertRefunds" parameterType="com.example.demo.domain.Refunds" useGeneratedKeys="true" keyProperty="id">
+        insert into refunds (user_id, create_time, order_number)  value(#{userId},now() ,#{orderNumber});
+    </insert>
+
+
+    <!--添加退货明细-->
+    <insert id="insertRefundsDetail" parameterType="com.example.demo.domain.RefundsDetail" >
+        insert into refunds_detail (goods_id, current_price,amount,refunds_id,sales_number) value(#{goodId},#{currentPrice},#{amount},#{refundsId},#{salesNumber});
+    </insert>
+
+
+    <!--减少销售单可退数量-->
+    <update id="updateOutGood" >
+        update sales_detail set outgood=outgood-#{outGoods} where sales_id=#{salesId} and good_id=#{goodId} and status=1;
+    </update>
+
+
+
+
+    <!--添加出库单总金额-->
+    <update id="insertRefundsMoney" >
+        update refunds set total_money=total_money+#{totalMoney} where id=#{refundsId} and status=1;
+    </update>
+
+
+    <!--查询退货投档-->
+    <select id="selestRefunds" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select * from refunds where id=#{refundsId} and status=1;
+    </select>
+
+    <!--查询退货明细-->
+    <select id="selestRefundsDetail" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select * from refunds_detail where refunds_id=#{refundsId} and status=1;
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--查询出库明细-->
+    <select id="selectNewDetail" parameterType="java.lang.Integer" resultType="com.alibaba.fastjson.JSONObject">
+            select * from outstock_detail  where outstocks_id=#{outStockNweId} and status=1 ;
+    </select>
+
+
+
+
+
+</mapper>

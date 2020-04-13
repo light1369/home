@@ -5,7 +5,7 @@
 <mapper namespace="com.example.demo.map.SalesDetailMap">
 
     <insert id="InsertSalesDetail" parameterType="com.example.demo.domain.SalesDetail">
-        insert into sales_detail (good_id,sales_id,amount,price,subtotal) values (#{goodId},#{salesId},#{amount},#{price},#{subtotal});
+        insert into sales_detail (good_id,sales_id,amount,price,subtotal,outgood) values (#{goodId},#{salesId},#{amount},#{price},#{subtotal},#{amount});
     </insert>
 
     <select id="selectSalesDetail" parameterType="java.lang.Integer" resultType="java.util.Map">

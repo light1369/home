@@ -46,13 +46,13 @@
     </update>
 
 
-    <!--传goodid,supplierid时间排序得到价格，数量-->
+    <!--传goodid,supplierid时间排序得到价格，数量,过滤过期以及退库完的入库单-->
     <select id="selecAmountPrice" parameterType="java.lang.Integer" resultType="java.util.Map">
-            select i_d.id id, i_d.amount amount,i_d.original_price price from  instock_detail i_d inner join instock i on i_d.instock_id = i.id where i_d.goods_id=#{goodId} and i.supplier_id=#{SupplierId} order by i.create_time;
+            select i_d.id id, i_d.amount amount,i_d.original_price price from  instock_detail i_d inner join instock i on i_d.instock_id = i.id where i_d.goods_id=#{goodId} and i.supplier_id=#{SupplierId} and i_d.out_amount>0 and date_add(create_time, interval 1 year)>now()  order by i.create_time;
     </select>
 
-<update id="updateStatus" parameterType="java.lang.Integer">
-    update instock_detail set status=0 where id=#{instockDetailId};
+<update id="updateStatus" parameterType="com.example.demo.domain.InstockDetail">
+    update instock_detail set out_amount=out_amount-#{stockAmount} where id=#{instockDetailId};
 </update>
 
 

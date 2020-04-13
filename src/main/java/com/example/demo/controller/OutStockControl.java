@@ -45,8 +45,6 @@ public class OutStockControl {
 //得到退库单号
         String orderNumber = outStockService.initialization();
 
-
-
         //得到前台数据
         Integer SupplierId=(Integer) hashMap.get("SupplierId");
         if (SupplierId == null) {

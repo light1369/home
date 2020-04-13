@@ -29,7 +29,7 @@ public interface InstockMap {
 //传goodid,supplierid时间排序得到价格，数量
     List<Map<String,Object>> selecAmountPrice(Integer goodId, Integer SupplierId);
 
-    int updateStatus(Integer instockDetailId);//退库后修改入库明细status
+    int updateStatus(Integer instockDetailId,double stockAmount);//退库后修改入库明细status
 
 
 

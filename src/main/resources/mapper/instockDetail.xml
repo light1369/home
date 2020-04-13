@@ -21,7 +21,7 @@
 
     <!--插入入库明细-->
     <insert id="insertDetail" parameterType="com.example.demo.domain.InstockDetail" >
-        insert into instock_detail (goods_id, original_price,amount,instock_id) value(#{goodid},#{OrPrice},#{Amount},#{instockNweId});
+        insert into instock_detail (goods_id, original_price,amount,instock_id,out_amount) value(#{goodid},#{OrPrice},#{Amount},#{instockNweId},#{Amount});
     </insert>
 
 

@@ -12,11 +12,12 @@ public class SalesDetail {
     private double price;//价格
     private double subtotal;//小计
     private Integer status;
+    private double outgood;
 
     public SalesDetail() {
     }
 
-    public SalesDetail(Integer id, Integer goodId, Integer salesId, double amount, double price, double subtotal, Integer status) {
+    public SalesDetail(Integer id, Integer goodId, Integer salesId, double amount, double price, double subtotal, Integer status, double outgood) {
         this.id = id;
         this.goodId = goodId;
         this.salesId = salesId;
@@ -24,6 +25,7 @@ public class SalesDetail {
         this.price = price;
         this.subtotal = subtotal;
         this.status = status;
+        this.outgood = outgood;
     }
 
     public Integer getId() {
@@ -58,8 +60,8 @@ public class SalesDetail {
         this.amount = amount;
     }
 
-    public double getPrice(double price) {
-        return this.price;
+    public double getPrice() {
+        return price;
     }
 
     public void setPrice(double price) {
@@ -80,5 +82,13 @@ public class SalesDetail {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public double getOutgood() {
+        return outgood;
+    }
+
+    public void setOutgood(double outgood) {
+        this.outgood = outgood;
     }
 }

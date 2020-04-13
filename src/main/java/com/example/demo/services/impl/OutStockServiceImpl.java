@@ -76,11 +76,12 @@ public class OutStockServiceImpl implements OutStockService {
                 if (stockAmount < OutAmount) {//如果最早入库数量小于退货数量，将最早入库数量先退回，再减其次的
                     //价格为入库时的价格l.get("price")
                     result=outStockMap.insertOutStockDetail(outStockDetail.getGoodsId(),price,stockAmount,outStock.getId());
-                    instockMap.updateStatus(((Integer)l.get("id")));
+                    instockMap.updateStatus(((Integer)l.get("id")),stockAmount);
                     OutAmount = OutAmount - stockAmount;//剩余要退数量
                     outStock.setTotalMoney(outStock.getTotalMoney()+(price*stockAmount));//部分退库金额
                 } else {
                     result=outStockMap.insertOutStockDetail(outStockDetail.getGoodsId(),price,OutAmount,outStock.getId());
+                    instockMap.updateStatus(((Integer)l.get("id")),OutAmount);
                     outStock.setTotalMoney(outStock.getTotalMoney()+price*OutAmount);//部分退库金额
                     OutAmount = 0;
                     break;

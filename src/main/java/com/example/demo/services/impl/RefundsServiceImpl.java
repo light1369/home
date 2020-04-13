@@ -1,5 +1,8 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.domain.Refunds;
+import com.example.demo.domain.RefundsDetail;
+import com.example.demo.domain.SalesDetail;
 import com.example.demo.map.RefundsMap;
 import com.example.demo.services.RefundsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Duan
@@ -16,6 +20,7 @@ import java.util.Date;
 public class RefundsServiceImpl implements RefundsService {
     @Autowired
     RefundsMap refundsMap;
+
 
     @Override
     public String initialization() {
@@ -37,5 +42,54 @@ public class RefundsServiceImpl implements RefundsService {
 
         }
         return dateString+number;
+    }
+
+    @Override
+    public int seleciOrderNumber(String orderNumber) {
+        return refundsMap.seleciOrderNumber(orderNumber);
+    }
+
+    @Override
+    public double selecAmount(SalesDetail salesDetail) {
+        Double amount=refundsMap.selecAmount(salesDetail);
+        if(amount ==null){
+            return 0;
+        }
+        return (double)amount;
+    }
+
+    @Override
+    public Integer insertRefunds(Refunds refunds) {
+        return refundsMap.insertRefunds(refunds);
+    }
+
+    @Override
+    public int insertRefundsDetail(Refunds refunds, RefundsDetail refundsDetail) {
+        int num=0;
+        if(refundsMap.insertRefundsDetail(refundsDetail)<=0){
+
+        };
+
+
+        //累加退货投档金额
+        num=refundsMap.insertRefundsMoney(refunds.getId(), refundsDetail.getAmount()*refundsDetail.getCurrentPrice());
+
+
+        return num;
+    }
+
+    @Override
+    public int updateOutGood(Integer goodId, Integer salesId,double outGoods) {
+        return refundsMap.updateOutGood(goodId,salesId,outGoods);
+    }
+
+    @Override
+    public List<Refunds> selestRefunds(Integer refundsId) {
+        return refundsMap.selestRefunds(refundsId);
+    }
+
+    @Override
+    public List<RefundsDetail> selestRefundsDetail(Integer refundsId) {
+        return refundsMap.selestRefundsDetail(refundsId);
     }
 }

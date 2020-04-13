@@ -9,19 +9,19 @@ public class RefundsDetail {
     private Integer goodId;
     private double currentPrice;
     private double amount;
-    private double refundsAmount;
+    private String salesNumber;
     private Integer refundsId;
     private Integer status;
 
     public RefundsDetail() {
     }
 
-    public RefundsDetail(Integer id, Integer goodId, double currentPrice, double amount, double refundsAmount, Integer refundsId, Integer status) {
+    public RefundsDetail(Integer id, Integer goodId, double currentPrice, double amount, String salesNumber, Integer refundsId, Integer status) {
         this.id = id;
         this.goodId = goodId;
         this.currentPrice = currentPrice;
         this.amount = amount;
-        this.refundsAmount = refundsAmount;
+        this.salesNumber = salesNumber;
         this.refundsId = refundsId;
         this.status = status;
     }
@@ -58,12 +58,12 @@ public class RefundsDetail {
         this.amount = amount;
     }
 
-    public double getRefundsAmount() {
-        return refundsAmount;
+    public String getSalesNumber() {
+        return salesNumber;
     }
 
-    public void setRefundsAmount(double refundsAmount) {
-        this.refundsAmount = refundsAmount;
+    public void setSalesNumber(String salesNumber) {
+        this.salesNumber = salesNumber;
     }
 
     public Integer getRefundsId() {
