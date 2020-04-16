@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,11 +12,13 @@ import java.util.List;
 public class Refunds {
 
     private Integer id;
+    @NotBlank(message = "用户id不能为空")
     private Integer userId;
     private double totalMoney;
     private double payment;
     private double changeMoney;
     private Date createTime;
+    @NotBlank(message = "销售单号不能为空")
     private String orderNumber;
     private Integer status;
 

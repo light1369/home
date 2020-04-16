@@ -4,10 +4,15 @@ import com.example.demo.domain.Refunds;
 import com.example.demo.domain.RefundsDetail;
 import com.example.demo.domain.SalesDetail;
 import com.example.demo.map.RefundsMap;
+import com.example.demo.map.StockMap;
 import com.example.demo.services.RefundsService;
+import com.example.demo.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.validation.annotation.Validated;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +25,8 @@ import java.util.List;
 public class RefundsServiceImpl implements RefundsService {
     @Autowired
     RefundsMap refundsMap;
+    @Autowired
+    StockMap stockMap;
 
 
     @Override
@@ -59,8 +66,20 @@ public class RefundsServiceImpl implements RefundsService {
     }
 
     @Override
-    public Integer insertRefunds(Refunds refunds) {
-        return refundsMap.insertRefunds(refunds);
+    public Integer insertRefunds( Refunds refunds)  {
+        Integer refundsId=null;
+        try {
+            refundsId=refundsMap.insertRefunds(refunds);
+        if (refundsId <= 0) {
+            throw new SQLException();
+        }
+    }catch (SQLException e){
+       e.printStackTrace();
+        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); //事务回滚
+        Result.createAddError().put("message", "添加退货投档失败");
+
+    }
+        return refundsId;
     }
 
     @Override
@@ -70,7 +89,8 @@ public class RefundsServiceImpl implements RefundsService {
 
         };
 
-
+        //添加库存
+        stockMap.updateStock(refundsDetail.getAmount(),refundsDetail.getGoodId());
         //累加退货投档金额
         num=refundsMap.insertRefundsMoney(refunds.getId(), refundsDetail.getAmount()*refundsDetail.getCurrentPrice());
 
