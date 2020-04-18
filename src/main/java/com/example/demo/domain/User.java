@@ -9,17 +9,19 @@ public class User {
     private String name;
     private String password;
     private double cashierMoney;
+    private Integer jurisdictionId;
     private int status;
 
 
     public User() {
     }
 
-    public User(Integer id, String name, String password, double cashierMoney, int status) {
+    public User(Integer id, String name, String password, double cashierMoney, Integer jurisdictionId, int status) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.cashierMoney = cashierMoney;
+        this.jurisdictionId = jurisdictionId;
         this.status = status;
     }
 
@@ -53,6 +55,14 @@ public class User {
 
     public void setCashierMoney(double cashierMoney) {
         this.cashierMoney = cashierMoney;
+    }
+
+    public Integer getJurisdictionId() {
+        return jurisdictionId;
+    }
+
+    public void setJurisdictionId(Integer jurisdictionId) {
+        this.jurisdictionId = jurisdictionId;
     }
 
     public int getStatus() {

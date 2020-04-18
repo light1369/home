@@ -26,6 +26,11 @@ public class UserServiceDaoImpl implements UserServiceDao {
     private UserMap userMap;
 
     @Override
+    public List<User> logSelect(User user) {
+        return userMap.logSelect(user);
+    }
+
+    @Override
     public int insert(User user) {
         return userMap.insert(user);
     }

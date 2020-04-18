@@ -12,6 +12,9 @@ import java.util.List;
 
 @Repository
 public interface UserMap {
+    //登录
+    List<User> logSelect(User user);
+
     //添加数据
     int insert(User user);
 

@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Duan
@@ -27,6 +28,9 @@ public class RefundsServiceImpl implements RefundsService {
     RefundsMap refundsMap;
     @Autowired
     StockMap stockMap;
+    @Autowired
+    RefundsService refundsService;
+
 
 
     @Override
@@ -52,7 +56,7 @@ public class RefundsServiceImpl implements RefundsService {
     }
 
     @Override
-    public int seleciOrderNumber(String orderNumber) {
+    public Integer seleciOrderNumber(String orderNumber) {
         return refundsMap.seleciOrderNumber(orderNumber);
     }
 
@@ -83,19 +87,77 @@ public class RefundsServiceImpl implements RefundsService {
     }
 
     @Override
-    public int insertRefundsDetail(Refunds refunds, RefundsDetail refundsDetail) {
+    public Integer insertRefundsDetail(Map map) throws Exception {
         int num=0;
-        if(refundsMap.insertRefundsDetail(refundsDetail)<=0){
+        Integer goodId=null;
+        double amount=0.00;
+        double price=0.00;
+        Integer refundsId = null;
+        Integer refundsNewId=null;
 
-        };
+        String outNumber = refundsService.initialization();//得到退货单号
+        Integer userId = (Integer) map.get("userId");//用户id
+        String orderNumber = (String) map.get("orderNumber");//销售单号
 
-        //添加库存
-        stockMap.updateStock(refundsDetail.getAmount(),refundsDetail.getGoodId());
-        //累加退货投档金额
-        num=refundsMap.insertRefundsMoney(refunds.getId(), refundsDetail.getAmount()*refundsDetail.getCurrentPrice());
+        //校验销售单是否存在以及时效
+        Integer salesId = refundsService.seleciOrderNumber(orderNumber);
 
 
-        return num;
+        //退货投档
+        Refunds refunds = new Refunds();
+        refunds.setUserId(userId);
+        refunds.setOrderNumber(outNumber);
+        refunds.setSalesNumber(orderNumber);
+
+        refundsId = refundsService.insertRefunds(refunds);
+        if(refundsId<=0){throw new Exception("test exception!");}
+        refundsNewId=refunds.getId();
+
+        if(true){throw new Exception("test exception!");}
+        List<Map<String, Object>> outlist = (List) map.get("outlist");
+        for (Map<String, Object> o : outlist) {
+            goodId = (Integer) o.get("goodId");
+            amount = (double) o.get("amount");
+
+            SalesDetail salesDetail = new SalesDetail();//添加为对象查询
+            salesDetail.setGoodId(goodId);
+            salesDetail.setAmount(amount);
+            salesDetail.setSalesId(salesId);
+
+            price = refundsMap.selecAmount(salesDetail);
+            if (price <= 0) {
+                 throw new Exception("test exception!");
+            }
+
+//添加退货明细单，减少销售单中可退回数量,累加投档总退回数
+            RefundsDetail refundsDetail = new RefundsDetail();
+            refundsDetail.setGoodId(goodId);
+            refundsDetail.setAmount(amount);
+            refundsDetail.setCurrentPrice(price);
+            refundsDetail.setRefundsId(refunds.getId());
+
+
+
+            //减少销售单可退数量
+            refundsMap.updateOutGood(goodId, salesId, amount);
+
+
+            if(refundsMap.insertRefundsDetail(refundsDetail)<=0){
+
+            };
+
+            //添加库存
+            stockMap.updateStock(refundsDetail.getAmount(),refundsDetail.getGoodId());
+            //累加退货投档金额
+            num=refundsMap.insertRefundsMoney(refunds.getId(), refundsDetail.getAmount()*refundsDetail.getCurrentPrice());
+
+        }
+
+
+
+
+
+        return refundsNewId;
     }
 
     @Override

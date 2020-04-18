@@ -3,8 +3,10 @@ package com.example.demo.services;
 import com.example.demo.domain.Refunds;
 import com.example.demo.domain.RefundsDetail;
 import com.example.demo.domain.SalesDetail;
+import com.example.demo.util.Result;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Duan
@@ -13,14 +15,14 @@ import java.util.List;
 public interface RefundsService {
     String initialization();//返回退货单号
 
-    int seleciOrderNumber(String orderNumber);//查询销售单的时效性
+    Integer seleciOrderNumber(String orderNumber);//查询销售单的时效性
 
     double selecAmount(SalesDetail salesDetail);//校验商品id,和数量是否正确
 
     Integer insertRefunds(Refunds refunds);//添加退货投档
 
     //添加退货明细单，累加退货单总退回金额
-    int insertRefundsDetail(Refunds refunds, RefundsDetail refundsDetail);
+    Integer insertRefundsDetail(Map map) throws Exception;
 
     int updateOutGood(Integer goodId,Integer salesId,double outGoods);//减少销售明细可退数量
 

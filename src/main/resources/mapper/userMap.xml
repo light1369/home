@@ -3,8 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.map.UserMap">
+    <resultMap id="result" type="com.example.demo.domain.User">
+        <result property="jurisdictionId" column="jurisdiction_id"/>
+    </resultMap>
+
+    <select id="logSelect" resultType="com.example.demo.domain.User" resultMap="result">
+        select * from user where name=#{name} and password=#{password} and status=1;
+    </select>
+
     <insert id="insert" parameterType="com.example.demo.domain.User">
-        insert into user (name,password) values (#{name},#{password});
+        insert into user (name,password,jurisdiction_id) values (#{name},#{password},#{jurisdictionId});
     </insert>
 
     <select id="selectAll" resultType="com.example.demo.domain.User">

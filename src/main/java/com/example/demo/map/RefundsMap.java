@@ -16,7 +16,7 @@ public interface RefundsMap {
 
     String initialization();//返回退货单号
 
-    int seleciOrderNumber(String orderNumber);//查询销售单的时效性
+    Integer seleciOrderNumber(String orderNumber);//查询销售单的时效性
 
     Double selecAmount(SalesDetail salesDetail);//校验商品id,和数量是否正确,返回价格
 

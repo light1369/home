@@ -10,6 +10,9 @@ import java.util.List;
  * @date 2020/3/24 - 9:24
  */
 public interface UserServiceDao {
+    //登录
+    List<User> logSelect(User user);
+
     //@Insert("")
     int insert(User user);
 

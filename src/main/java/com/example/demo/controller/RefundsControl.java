@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import java.sql.SQLException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -38,96 +38,73 @@ public class RefundsControl {
 
     @InitBinder
     public void setupBinder(WebDataBinder binder) {
-     if (binder.getTarget()==null){
-         return;
-     }
-
-     if(refundsValidator.supports(binder.getTarget().getClass())){
-         binder.addValidators(refundsValidator);
-
-     }
+        if (binder.getTarget() == null) {
+            return;
+        }
+        binder.addValidators(refundsValidator);
 
     }
 
 
     @RequestMapping("/outgood")
     @Transactional(propagation = Propagation.REQUIRED)
-    public Result outGoods(@Valid @RequestBody Map map) throws Exception {
-//
-            Integer goodId = null;
-            double amount = 0.00;
-            double price = 0.00;
-            Integer refundsId = null;
+    public Result outGoods(@RequestBody Map map) throws Exception {
 
-            //@NotBlank(message = "销售单不能为空")
-            String orderNumber = (String) map.get("orderNumber");//销售单号
-            if (orderNumber == null) {
-                throw new Exception("test exception!");
-                //return Result.createNotFoundError().put("message","没有："+orderNumber);
+        Integer refundsId = null;
+
+
+        String orderNumber = (String) map.get("orderNumber");//销售单号
+            if (orderNumber==null || orderNumber=="") {
+//                throw new Exception("test exception!");
+                    return Result.createNotFoundError().put("message","没有商品销售单");
             }
 
 
-            String outNumber = refundsService.initialization();//得到退货单号
-            Integer userId = (Integer) map.get("userId");//用户id
+        //校验销售单是否存在以及时效
+        Integer salesId = refundsService.seleciOrderNumber(orderNumber);
+        if (salesId == null) {
 
-            //校验销售单是否存在以及时效
-            Integer salesId = refundsService.seleciOrderNumber(orderNumber);
-            if (salesId <= 0) {
+            return Result.createParameterError().put("message", "无效单号或商品已超出退货时间段");
+        }
 
-                return Result.createParameterError().put("message", "无效单号或商品已超出退货时间段");
-            }
+//执行退货操作
+        refundsId=refundsService.insertRefundsDetail(map);
 
-//退货投档
-            Refunds refunds = new Refunds();
-            refunds.setUserId(userId);
-            refunds.setOrderNumber(outNumber);
+//得到添加的明细以及投档
+        List<Refunds> Refundslist = refundsService.selestRefunds(refundsId);
 
-
-            refundsId = refundsService.insertRefunds(refunds);
+        List<RefundsDetail> RefundsDetail = refundsService.selestRefundsDetail(refundsId);
 
 
+        return Result.createSuccess().put("退货投档", Refundslist).put("退货明细", RefundsDetail);
 
-            List<Map<String, Object>> outlist = (List) map.get("outlist");
-            for (Map<String, Object> o : outlist) {
-                goodId = (Integer) o.get("goodId");
-                amount = (double) o.get("amount");
-
-                SalesDetail salesDetail = new SalesDetail();//添加为对象查询
-                salesDetail.setGoodId(goodId);
-                salesDetail.setAmount(amount);
-                salesDetail.setSalesId(salesId);
-
-                price = refundsService.selecAmount(salesDetail);
-                if (price <= 0) {
-                    return Result.createNotFoundError().put("message", "没有找到对应商品，请检查数量,id:" + goodId);
-                }
-
-//添加退货明细单，减少销售单中可退回数量,累加投档总退回数
-                RefundsDetail refundsDetail = new RefundsDetail();
-                refundsDetail.setGoodId(goodId);
-                refundsDetail.setAmount(amount);
-                refundsDetail.setCurrentPrice(price);
-                refundsDetail.setRefundsId(refundsId);
-                refundsDetail.setSalesNumber(orderNumber);
-
-                refundsService.insertRefundsDetail(refunds, refundsDetail);
-
-                //减少销售单可退数量
-                refundsService.updateOutGood(goodId, salesId, amount);
-
-            }
-
-            List<Refunds> Refundslist = refundsService.selestRefunds(refundsId);
-
-            List<RefundsDetail> RefundsDetail = refundsService.selestRefundsDetail(refundsId);
+    }
 
 
-            return Result.createSuccess().put("退货投档", Refundslist).put("退货明细", RefundsDetail);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); //事务回滚
-//        }
-//        return Result.createSuccess();
+    //@RequestMapping("/outgood")
+    public Refunds out(@RequestBody Refunds refunds, BindingResult result, HttpServletResponse response) {
+
+        if (result.hasErrors()) {
+            result.getAllErrors().forEach((error) -> {
+                FieldError fieldError = (FieldError) error;
+                // 属性
+                String field = fieldError.getField();
+                // 错误信息
+                String message = fieldError.getDefaultMessage();
+                System.out.println(field + ":" + message);
+            });
+
+        }
+        // ...
+
+
+        List<RefundsDetail> refundsDetail = refunds.getRefundsDetail();
+        for (RefundsDetail l : refundsDetail) {
+            l.getGoodId();
+
+        }
+
+        return refunds;
     }
 
 

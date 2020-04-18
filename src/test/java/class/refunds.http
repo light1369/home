@@ -8,11 +8,11 @@ Content-Type: application/json
   "outlist":[
     {
       "goodId":6,
-      "amount":9.0
+      "amount":1.0
     },
     {
       "goodId":6,
-      "amount":9.0
+      "amount":1.0
     }
 
   ]

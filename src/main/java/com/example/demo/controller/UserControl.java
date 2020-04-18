@@ -5,10 +5,13 @@ import com.example.demo.domain.User;
 import com.example.demo.util.Result;
 import com.example.demo.services.UserServiceDao;
 
+import com.example.demo.validator.UserValidetor;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -28,10 +31,36 @@ public class UserControl {
 
     @Autowired// 自动注入
     private UserServiceDao userServiceDao;//属于依赖
+    @Autowired
+    UserValidetor userValidetor;
 
+
+    @InitBinder
+    public void setupBinder(WebDataBinder binder) {
+        if (binder.getTarget()==null){
+            return;
+        }
+
+        if(userValidetor.supports(binder.getTarget().getClass())){
+            binder.addValidators(userValidetor);
+
+        }
+
+    }
+
+    @PostMapping("/log")
+    public Result log(@Valid @RequestBody User user){
+
+        List<User> list=userServiceDao.logSelect(user);
+        if(list.isEmpty()){
+            return Result.createNotFoundError().put("message","密码错误！");
+        }
+
+        return Result.createSuccess().put("user",list);
+    }
 
     @PostMapping("/insert")
-    public Result insert(@RequestBody User user) {
+    public Result insert(@Valid @RequestBody User user) {
 
         if (user.getName() == null || user.getName().trim().isEmpty() || user.getPassword() == null || user.getPassword().trim().isEmpty()) {
             return Result.createFormatError();

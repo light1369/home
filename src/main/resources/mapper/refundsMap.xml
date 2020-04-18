@@ -40,7 +40,7 @@
 
     <!--添加退货明细-->
     <insert id="insertRefundsDetail" parameterType="com.example.demo.domain.RefundsDetail" >
-        insert into refunds_detail (goods_id, current_price,amount,refunds_id,sales_number) value(#{goodId},#{currentPrice},#{amount},#{refundsId},#{salesNumber});
+        insert into refunds_detail (goods_id, current_price,amount,refunds_id) value(#{goodId},#{currentPrice},#{amount},#{refundsId});
     </insert>
 
 
