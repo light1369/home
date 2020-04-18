@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Goods</title>
+    <link rel="stylesheet" href="css/index.css" type="text/css">
+</head >
+<body background="img/background_day.jpg">
+<div id="div_from_log" class="div_from_log">
+
+    <form id="log" class="good_form_log" method="get" action="http://localhost:8080/user/insert">
+        <p class="form-logo">用户登录</p>
+        <p id="name" class="username">
+            <input id="userName" type="text" name="Name" class="text-input-userName" autocomplete="off" value=""
+                   placeholder="手机/邮箱/用户名">
+        </p>
+        <p id="pass" class="password">
+            <input id="password" type="password" name="password" class="text-input-password" autocomplete="off" value=""
+                   placeholder="密码">
+        </p>
+
+        <small id="memberPassWrapper" class="form-item-memberPass">
+            <input id="TANGRAM__PSP_10__memberPass" type="checkbox" name="memberPass" class="checkbox-memberPass" checked="checked">
+            <label for="TANGRAM__PSP_10__memberPass" id="TANGRAM__PSP_10__memberPassLabel" class="">下次自动登录</label>
+        </small>
+
+        <p>
+            <input id="submit" type="submit" value="登录" class="pass-button-submit">
+            <a></a>
+            <a></a>
+        </p>
+    </form>
+</div>
+</body>
+</html>

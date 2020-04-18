@@ -9,10 +9,6 @@ Content-Type: application/json
     {
       "goodId":6,
       "amount":1.0
-    },
-    {
-      "goodId":6,
-      "amount":1.0
     }
 
   ]

@@ -9,6 +9,8 @@ import com.example.demo.services.RefundsService;
 import com.example.demo.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.validation.annotation.Validated;
 
@@ -87,13 +89,14 @@ public class RefundsServiceImpl implements RefundsService {
     }
 
     @Override
+    @Transactional()
     public Integer insertRefundsDetail(Map map) throws Exception {
-        int num=0;
-        Integer goodId=null;
-        double amount=0.00;
-        double price=0.00;
-        Integer refundsId = null;
-        Integer refundsNewId=null;
+
+        Integer goodId;
+        double amount;
+        double price;
+        Integer refundsId;
+        Integer refundsNewId;
 
         String outNumber = refundsService.initialization();//得到退货单号
         Integer userId = (Integer) map.get("userId");//用户id
@@ -110,10 +113,10 @@ public class RefundsServiceImpl implements RefundsService {
         refunds.setSalesNumber(orderNumber);
 
         refundsId = refundsService.insertRefunds(refunds);
-        if(refundsId<=0){throw new Exception("test exception!");}
+        if(refundsId<=0){throw new RuntimeException("头档添加失败！!");}
         refundsNewId=refunds.getId();
 
-        if(true){throw new Exception("test exception!");}
+        //if(true){throw new RuntimeException("refundsNewId 数据不正确!");}
         List<Map<String, Object>> outlist = (List) map.get("outlist");
         for (Map<String, Object> o : outlist) {
             goodId = (Integer) o.get("goodId");
@@ -126,7 +129,7 @@ public class RefundsServiceImpl implements RefundsService {
 
             price = refundsMap.selecAmount(salesDetail);
             if (price <= 0) {
-                 throw new Exception("test exception!");
+                 throw new RuntimeException("test exception!");
             }
 
 //添加退货明细单，减少销售单中可退回数量,累加投档总退回数
@@ -143,13 +146,13 @@ public class RefundsServiceImpl implements RefundsService {
 
 
             if(refundsMap.insertRefundsDetail(refundsDetail)<=0){
-
+                throw new RuntimeException("明细添加失败！!");
             };
 
             //添加库存
             stockMap.updateStock(refundsDetail.getAmount(),refundsDetail.getGoodId());
             //累加退货投档金额
-            num=refundsMap.insertRefundsMoney(refunds.getId(), refundsDetail.getAmount()*refundsDetail.getCurrentPrice());
+            refundsMap.insertRefundsMoney(refundsNewId, refundsDetail.getAmount()*refundsDetail.getCurrentPrice());
 
         }
 

@@ -47,7 +47,6 @@ public class RefundsControl {
 
 
     @RequestMapping("/outgood")
-    @Transactional(propagation = Propagation.REQUIRED)
     public Result outGoods(@RequestBody Map map) throws Exception {
 
         Integer refundsId = null;

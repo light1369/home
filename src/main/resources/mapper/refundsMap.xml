@@ -34,7 +34,7 @@
 
     <!--添加退货单信息-->
     <insert id="insertRefunds" parameterType="com.example.demo.domain.Refunds" useGeneratedKeys="true" keyProperty="id">
-        insert into refunds (user_id, create_time, order_number)  value(#{userId},now() ,#{orderNumber});
+        insert into refunds (user_id, create_time, order_number,sales_number)  value(#{userId},now() ,#{orderNumber},#{salesNumber});
     </insert>
 
 
