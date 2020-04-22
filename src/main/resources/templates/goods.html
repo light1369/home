@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Goods</title>
+    <link rel="stylesheet" href="css/goods.css" type="text/css">
+
+    <script>
+        var colors = ["#f5d76e", "#3ec27f", "#22a7f0", "#d2527f", "#1e824c", "#bf55ec", "#f64747", "#e67e22", "#4b77be", "#be90d4"];
+        $("#information").click(function () {
+            var n = Math.floor(Math.random() * 10);
+            var color = colors[n]
+            $("#information").css("background", color);
+        });
+        var old = null;
+
+        function ggg(element) {
+            if (old != null)
+                old.style.backgroundColor = "#2A394C";
+            //old.style.color="aliceblue";
+
+            element.style.backgroundColor = "#222E3C";
+            // element.style.color="#358EF5";
+            old = element;
+        }
+
+        var old2 = null;
+
+        function table_back(element) {
+            if (old2 != null)
+                old2.style.cssText="backgroundColor = white;";
+            //old2.style.color="black";
+
+            element.style.backgroundColor = "#FAFAFA";
+            old2 = element;
+        }
+
+        // var r=0;
+        // function spin() {
+        //     r+=90;
+        //     $(#id).css('transform','rotate('+r+'+deg)');
+        //
+        // }
+
+
+    </script>
+</head>
+
+<body>
+<div id="body" class="body">
+    <div id="catalogue" class="catalogue">
+        <div id="catalogue-log" class="catalogue-log"><span><img src="img/log.png"> 资产管理平台</span></div>
+        <div id="catalogue-read" class="catalogue-read">
+            <div id="information" class="information" onclick="ggg(this)">
+                <span>基础信息</span>
+                <img src="img/shousuo.png">
+            </div>
+            <div id="money" class="money" onclick="ggg(this)"><span>资产管理</span></div>
+            <div id="bill" class="bill" onclick="ggg(this)"><span>资产台账</span></div>
+            <div id="pledge" class="pledge" onclick="ggg(this)"><span>资产抵押</span></div>
+        </div>
+
+    </div>
+
+    <div id="content" class="content">
+        <div id="top" class="top">
+            <div id="log1" class="log1"><span><img src="img/daohang.jpg"> 资产管理</span></div>
+            <div id="register" class="register"><img src="img/tx.png"> 登录</div>
+        </div>
+        <div id="top1" class="top1">
+            <span class="num1">1</span>
+            <span class="num2">2</span>
+            <span class="num3">3</span>
+            <span class="num4">4</span>
+            <span class="num5">5</span>
+            <span class="num6">6</span>
+            <span class="num7">7</span>
+            <span class="num8">8</span>
+        </div>
+        <div id="top2" class="top2">
+            <input class="sele" type="text" placeholder="输入信息">
+            <select id="num1" class="">
+                <option value="0">产权归属</option>
+                <option value="1">私有</option>
+                <option value="2">企业</option>
+                <option value="3">国家</option>
+            </select>
+            <select id="num2" class="">
+                <option value="0">管理方式</option>
+                <option value="1">自理</option>
+                <option value="2">外包</option>
+                <option value="3">其他</option>
+            </select>
+            <select id="num3" class="">
+                <option value="0">资产来源</option>
+                <option value="1">购买</option>
+                <option value="2">继承</option>
+                <option value="3">其他</option>
+            </select>
+            <select id="num4" class="">
+                <option value="0">原产权单位</option>
+                <option value="1">私人</option>
+                <option value="2">企业</option>
+                <option value="3">国有</option>
+            </select>
+            <select id="num5" class="">
+                <option value="0">不动产权证</option>
+                <option value="1">银行担保</option>
+                <option value="2">房产证</option>
+                <option value="3">其他</option>
+            </select>
+            <span class="selec1">
+                <input type="submit" value="查询">
+            </span>
+            <span class="selec2">
+                <input type="submit" value="新增">
+            </span>
+        </div>
+
+        <div id="top3" class="top3">
+            <table>
+                <tr class="toubu">
+                    <th>类别</th>
+                    <th>地址</th>
+                    <th>数量</th>
+                    <th>房屋面积</th>
+                    <th>经营性面积</th>
+                    <th>价格</th>
+                    <th>年份</th>
+                    <th>操作</th>
+                </tr>
+                <tr onclick="table_back(this)">
+                    <td>别野</td>
+                    <td>南路</td>
+                    <td>1</td>
+                    <td>500平</td>
+                    <td>600平</td>
+                    <td>60/平</td>
+                    <td>6年</td>
+                    <td>
+                        <a href="#" onclick="">编辑</a>
+                        <select class="">
+                            <option value="0">更多</option>
+                            <option value="1">撤消</option>
+                            <option value="2">冻结</option>
+                            <option value="3">联系客户</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr onclick="table_back(this)">
+                    <td>民宿8610</td>
+                    <td>北路</td>
+                    <td>2</td>
+                    <td>100平</td>
+                    <td>120平</td>
+                    <td>40/平</td>
+                    <td>7年</td>
+                    <td>
+                        <a href="#">编辑</a>
+                        <select class="">
+                            <option value="0">更多</option>
+                            <option value="1">撤消</option>
+                            <option value="2">冻结</option>
+                            <option value="3">联系客户</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr onclick="table_back(this)">
+                    <td>民宿8810</td>
+                    <td>12北路</td>
+                    <td>1</td>
+                    <td>80平</td>
+                    <td>10平</td>
+                    <td>80/平</td>
+                    <td>3年</td>
+                    <td>
+                        <a href="#">编辑</a>
+                        <select class="">
+                            <option value="0">更多</option>
+                            <option value="1">撤消</option>
+                            <option value="2">冻结</option>
+                            <option value="3">联系客户</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr onclick="table_back(this)">
+                    <td>民宿8610</td>
+                    <td>北路</td>
+                    <td>2</td>
+                    <td>100平</td>
+                    <td>120平</td>
+                    <td>20/平</td>
+                    <td>10年</td>
+                    <td>
+                        <a href="#">编辑</a>
+                        <select class="">
+                            <option value="0">更多</option>
+                            <option value="1">撤消</option>
+                            <option value="2">冻结</option>
+                            <option value="3">联系客户</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+        <div id="top4" class="top4">
+            <div class="page1">
+                <span>共4条</span>
+                <select class="">
+
+                    <option value="3">3条/页</option>
+                    <option value="5">5条/页</option>
+                    <option value="7">7条/页</option>
+                    <option value="9">9条/页</option>
+
+                </select>
+            </div>
+            <div class="page2">
+                <a href="#"><img src="img/left.png"></a>
+                <a href="#"><span>1</span></a>
+                <a href="#"><img src="img/right.png"></a>
+            </div>
+            <div class="page3">
+                <span>
+                    前往 <input tyle="text" placeholder="1"> 页
+                </span>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

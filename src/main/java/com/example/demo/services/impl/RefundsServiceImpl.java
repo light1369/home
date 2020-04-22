@@ -113,7 +113,7 @@ public class RefundsServiceImpl implements RefundsService {
         refunds.setSalesNumber(orderNumber);
 
         refundsId = refundsService.insertRefunds(refunds);
-        if(refundsId<=0){throw new RuntimeException("头档添加失败！!");}
+        if(refundsId<=0){throw new RuntimeException("头档添加失败！!");}//抛出运行时异常
         refundsNewId=refunds.getId();
 
         //if(true){throw new RuntimeException("refundsNewId 数据不正确!");}
