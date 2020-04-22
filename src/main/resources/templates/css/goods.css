@@ -1,0 +1,265 @@
+/*	通配样式*/
+*{margin: 0;padding: 0;}/* 外边距 内填充 */
+img{vertical-align: middle;border: none;}/* 垂直居中 取消边框 */
+dl,ol,ul,input{list-style-type: none;outline: none;}/* 取消列表样式,取消点击后边框 */
+select{outline:none}/*取消点击后边框*/
+a{text-decoration: none;color: #358EF5}/* 取消下划线 */
+a:active {color: dimgray;}/* 点击时颜色 */
+body{font-family: "Microsoft YaHei";}/* 字体：微软雅黑 */
+html,body{height:100%;}/* 页面高度100% */
+
+
+
+.body{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    padding-top: 3px;
+    /*overflow:hidden;!*溢出隐藏*!*/
+    display: flex;
+    flex-wrap: nowrap;
+
+}
+/*目录部分*/
+.body .catalogue{
+    width: 200px;
+    height: 100%;
+    background-color: darkgray;
+    /*position: absolute;!*绝对位置*!*/
+
+}
+
+.body .catalogue .catalogue-log{
+    width: 200px;
+    height: 60px;
+    background-color: #2b2e3a;
+
+}
+.body .catalogue .catalogue-log span{
+    padding-left: 40px;
+    line-height:60px;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+.body .catalogue .catalogue-read div{
+    /*width: 100%;*/
+    height: 60px;
+    background-color: #2A394C;
+    display: flex;
+
+    justify-content:space-between;
+}
+
+
+.body .catalogue .catalogue-read div:hover{
+    background-color: grey;
+}
+.body .catalogue .catalogue-read div:hover span{
+    color: #358EF5;
+}
+
+.body .catalogue .catalogue-read div:active{/*点击时*/
+    background-color: #222E3C;
+}
+
+
+.body .catalogue .catalogue-read div span{
+    line-height:60px;
+    padding-left: 40px;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+.body .catalogue .catalogue-read div img{
+    width: 17px;
+    height: 17px;
+    padding: 4% 3% 0 0;
+
+}
+
+
+
+/*信息部分*/
+.body .content{
+    height: 100%;
+    /*width: 1150px;*/
+    background-color: white;
+    /*float: right;//右浮动*/
+    /*position: relative;!*相对位置*!*/
+}
+
+
+
+.body .content .top{
+    /*width: 100%;*/
+    /*height: 60px;*/
+    /*background-color: aliceblue;*/
+    display: flex;
+    /*flex-wrap: nowrap;*/
+    /*flex-direction: row;*/
+    justify-content:space-between;
+}
+
+.body .content .top div{
+    height: 60px;
+    line-height:50px;
+    /*background-color: chocolate;*/
+}
+
+.body .content .top .log1{
+    width: 10%;
+    padding-left: 20px;
+    /*position: absolute;*/
+
+}
+
+.body .content .top .register{
+    width: 10%;
+
+
+    /*float: right;*/
+    margin-right: 0;
+
+}
+
+
+.body .content .top1 {
+    /*height: 40px;*/
+    /*width: 100%;*/
+    border:3px solid #EBEEF5;
+    /*background-color: white;*/
+    /*vertical-align:middle;*/
+    /*text-align:center;*/
+}
+
+.body .content .top1 span{
+    display:inline-block;/*转为块元素*/
+    margin: 0.5% 0 0.5% 2%;
+    /*background-color: #358EF5;*/
+    border-radius: 20px;
+    padding: 0 0 0 1%;
+    /*text-align:center;*/
+    border:1px solid #EBEEF5;
+    height: 25px;
+    min-width: 100px;
+}
+
+
+.body .content .top2 {
+    /*height: 120px;*/
+    width: 90%;
+    display: flex;
+    flex-wrap:wrap;
+    padding: 10px 0 0 0;
+    /*background-color: white;*/
+}
+
+.body .content .top2 .sele,select,span input{
+    height: 30px;
+    margin: 10px 0 0 20px;
+    border:1px solid #EBEEF5;
+    color: #C4C8D0;
+}
+
+.body .content .top2 .sele{
+    width: 150px;
+    border:0px;
+    padding-left: 10px;
+    border-radius: 15px;
+    border:1px solid #EBEEF5;
+
+}
+.body .content .top2 select{
+    display:inline-block;
+    padding-left: 10px;
+    width: 150px;
+    border-radius: 15px; /*弧度*/
+    /*background-color: crimson;*/
+}
+
+.body .content .top2 span input{
+    width: 70px;
+    border:0px;
+    border-radius: 15px;
+    background-color: #3F9EFF;
+    color: white;
+    /*background-color: brown;*/
+}
+
+
+.body .content .top3 {
+     /*height: 200px;*/
+     width: 100%;
+    padding: 20px 0 0 0;
+     /*background-color: blueviolet;*/
+ }
+
+.body .content .top3 table{
+    margin: 0 0 0 2%;
+    border-collapse:collapse;
+    height: 180px;
+    min-width:1100px;
+}
+.body .content .top3 table .toubu {
+    background-color: #EEF2F7;
+    height: 40px;
+}
+.body .content .top3 table td, th{
+    border:1px solid #EBEEF5;
+    text-align: center;
+    font-size: 15px;
+    height: 35px;
+}
+
+.body .content .top3 table tr td select{
+    border-radius: 5px;
+    color: #358EF5;
+}
+
+
+
+.body .content .top4 {
+    /*height: 60px;*/
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    /*background-color: brown;*/
+}
+
+.body .content .top4 div{
+    /*background-color: cadetblue;*/
+    height: 30px;
+    width: 130px;
+    margin: 20px 0 0 40px;
+    text-align: center;
+
+}
+
+.body .content .top4 div select{
+    border-radius: 15px;
+    margin-left: 1%;
+}
+
+.body .content .top4 .page2 a{
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+    border: 1px solid #EBEEF5;
+    border-radius: 5px;
+    background-color: #F4F4F5;
+}
+
+.body .content .top4 .page2{
+
+    padding-top: 10px;
+}
+
+.body .content .top4 .page3 span input{
+    width: 30px;
+    height: 28px;
+    padding-left: 20px;
+    margin-left: 5px;
+    border-radius: 5px;
+
+}
