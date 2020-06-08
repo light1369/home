@@ -10,6 +10,7 @@ public class User {
     private String password;
     private double cashierMoney;
     private Integer jurisdictionId;
+    private String perms;
     private int status;
 
 
@@ -71,5 +72,13 @@ public class User {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getPerms() {
+        return perms;
+    }
+
+    public void setPerms(String perms) {
+        this.perms = perms;
     }
 }

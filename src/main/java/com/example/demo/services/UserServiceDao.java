@@ -19,7 +19,7 @@ public interface UserServiceDao {
     //@Select("select * from")
     List<User> selectAll();
 
-    List<User> selectId(int id);
+    User selectId(int id);
 
     List<User> selectPage(int page,int num);
 

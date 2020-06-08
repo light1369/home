@@ -2,22 +2,18 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Refunds;
 import com.example.demo.domain.RefundsDetail;
-import com.example.demo.domain.SalesDetail;
 import com.example.demo.services.RefundsService;
 import com.example.demo.util.Result;
 import com.example.demo.validator.RefundsValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import java.util.List;
 import java.util.Map;

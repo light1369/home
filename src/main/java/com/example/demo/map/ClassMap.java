@@ -1,7 +1,6 @@
 package com.example.demo.map;
 
 import com.example.demo.domain.Class;
-import com.example.demo.domain.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

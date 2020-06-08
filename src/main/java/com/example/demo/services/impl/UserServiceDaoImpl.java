@@ -43,7 +43,7 @@ public class UserServiceDaoImpl implements UserServiceDao {
 
 
     @Override
-    public List<User> selectId(int id) {
+    public User selectId(int id) {
 
         logger.debug("接收id:{id}",id );
         return userMap.selectId(id);

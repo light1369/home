@@ -66,4 +66,8 @@
     <update id="addCashierMoney">
         update user set cashier_money=cashier_money+#{cashierMoney} where id=#{userId} and status=1;
     </update>
+
+    <select id="findByName" parameterType="com.example.demo.domain.User">
+        select * from user  where name=#{name};
+    </select>
 </mapper>

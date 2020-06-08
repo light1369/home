@@ -22,7 +22,7 @@ public interface UserMap {
     List<User> selectAll();
 
     //通过id查找
-    List<User> selectId(int id);
+    User selectId(int id);
 
     //分页查找
     List<User> selectPage(int page,int num);
@@ -33,11 +33,12 @@ public interface UserMap {
     //修改状态
     int updateStatus(User user);
 
-
-
     //查询名字是否存在
     int selectName(User user);
 
     //添加销售单此次消费总金额
     int addCashierMoney(double cashierMoney,Integer userId);
+
+    //通过用户名查找user对象
+    User findByName(String name);
 }
